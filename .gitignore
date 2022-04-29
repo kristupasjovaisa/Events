@@ -1,5 +1,16 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+*.class
+*.jar
+*.war
+*.ear
+# generated files
+bin/**
+gen/**
+# project based files
 .idea/
-target/
+*.iml
+*.ipr
+*.iws
+.gradletasknamecache
+.gradle/
+build/
+bin/
