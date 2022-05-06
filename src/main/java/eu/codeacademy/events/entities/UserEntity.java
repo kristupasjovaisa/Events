@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +25,11 @@ public class User {
     private String nickName;
     private String description;
     private String location;
-    private LocalDate birhday;
+    private LocalDate birthday;
 
     @OneToMany
-    private List<Event> events = new ArrayList<>();
+    private List<EventEntity> createEvents = new ArrayList<>();
+
+    @OneToMany
+    private List<EventEntity> events = new ArrayList<>();
 }

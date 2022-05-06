@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "events")
-public class Event {
+public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +26,13 @@ public class Event {
     private String description;
     private String location;
     private LocalDateTime dateTime;
-    private BigDecimal members;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    private User user;
+    private UserEntity owner;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JoinTable(name = "events_users",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private List<UserEntity> members = new ArrayList<>();
 }
