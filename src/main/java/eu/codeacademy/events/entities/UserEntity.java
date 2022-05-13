@@ -1,12 +1,11 @@
 package eu.codeacademy.events.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,16 +22,10 @@ public class UserEntity {
 //    private String location;
 //    private LocalDate birthday;
 
-    @OneToMany(
-            mappedBy = "owner",
-            cascade = CascadeType.ALL
-    )
-    private List<EventEntity> createdEvents = new ArrayList<>();
+    @OneToMany
+    private Set<EventEntity> createdEvents;
 
-    @ManyToMany(mappedBy = "members", cascade = CascadeType.ALL)
-    private List<EventEntity> events = new ArrayList<>();
+    @ManyToMany(mappedBy = "members")
+    private Set<EventEntity> events;
 
-    public UserEntity(long id) {
-        this.id = id;
-    }
 }
