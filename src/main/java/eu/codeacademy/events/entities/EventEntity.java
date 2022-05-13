@@ -13,7 +13,6 @@ import java.util.Set;
 @Builder
 @Getter
 @Entity
-@Table(name = "events")
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +29,4 @@ public class EventEntity {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<UserEntity> members;
 
-    public void addMembers(UserEntity member) {
-        members.add(member);
-    }
-
-    public void addOwner(UserEntity owner) {
-        this.owner = owner;
-    }
 }
