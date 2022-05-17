@@ -6,18 +6,18 @@ spring:
     driver-class-name: org.h2.Driver
     username: events
     password: events
-  #  sql:
-  #    init:
-  #      schema-locations:
-  #      classpath:db/db-user.sql
-  #      classpath:db/db-event.sql
-  #      data-locations:
-  #      classpath:db/initial-data.sql
+  sql:
+    init:
+      schema-locations: classpath:db/db-schema.sql
+      data-locations: classpath:db/initial-data.sql
   h2:
     console:
       enabled: true
       path: /h2
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
