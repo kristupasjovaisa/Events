@@ -13,20 +13,22 @@ import java.util.Set;
 @Builder
 @Getter
 @Entity
+@Table(name = "events")
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //    private UUID eventId;
-//    private String name;
+    @Column(length = 20)
+    private String name;
 //    private String description;
 //    private String location;
 //    private LocalDateTime dateTime;
 //
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity owner;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private UserEntity owner;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<UserEntity> members;
+    @ManyToMany(mappedBy = "events")
+    private Set<UserEntity> users;
 
 }
