@@ -27,9 +27,9 @@ public class EventEntity {
     @Column(length = 50)
     private String location;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Timestamp startEventDate;
+    private Timestamp startEventDateTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Timestamp endEventDate;
+    private Timestamp endEventDateTime;
     @Column(length = 350)
     private String description;
 

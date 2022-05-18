@@ -15,14 +15,14 @@ CREATE TABLE users
 DROP TABLE IF EXISTS events;
 CREATE TABLE events
 (
-    id             BIGINT PRIMARY KEY AUTO_INCREMENT,
-    event_id       UUID         NOT NULL,
-    name           VARCHAR(20)  NOT NULL,
-    location       VARCHAR(50)  NOT NULL,
-    start_event_date TIMESTAMP         NOT NULL,
-    end_event_date   TIMESTAMP        NOT NULL,
-    description    VARCHAR(350) NOT NULL,
-    owner_id       BIGINT,
+    id                    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    event_id              UUID         NOT NULL,
+    name                  VARCHAR(20)  NOT NULL,
+    location              VARCHAR(50)  NOT NULL,
+    start_event_date_time TIMESTAMP    NOT NULL,
+    end_event_date_time   TIMESTAMP    NOT NULL,
+    description           VARCHAR(350) NOT NULL,
+    owner_id              BIGINT,
     FOREIGN KEY (owner_id) REFERENCES users (id)
 );
 
