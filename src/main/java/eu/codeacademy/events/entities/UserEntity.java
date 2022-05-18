@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -18,12 +21,15 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private UUID userId;
+    private UUID userId;
     @Column(length = 20)
     private String name;
-//    private String description;
-//    private String location;
-//    private LocalDate birthday;
+    @Column(length = 50)
+    private String location;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+    @Column(length = 350)
+    private String description;
 
     @ManyToMany(mappedBy = "users")
     private Set<EventEntity> events;
