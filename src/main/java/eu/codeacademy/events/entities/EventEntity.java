@@ -25,10 +25,9 @@ public class EventEntity {
 //    private String location;
 //    private LocalDateTime dateTime;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private UserEntity owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserEntity owner;
 
-    @ManyToMany(mappedBy = "events")
+    @ManyToMany
     private Set<UserEntity> users;
-
 }

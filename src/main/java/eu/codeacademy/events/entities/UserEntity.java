@@ -25,10 +25,10 @@ public class UserEntity {
 //    private String location;
 //    private LocalDate birthday;
 
-//    @OneToMany
-//    private Set<EventEntity> createdEvents;
-
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
     private Set<EventEntity> events;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<EventEntity> createdEvents;
 
 }
