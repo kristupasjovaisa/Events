@@ -26,7 +26,7 @@ public class UserEntity {
     private String name;
     @Column(length = 50)
     private String location;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
     @Column(length = 350)
     private String description;

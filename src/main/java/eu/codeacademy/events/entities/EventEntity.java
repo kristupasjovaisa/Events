@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,10 +26,10 @@ public class EventEntity {
     private String name;
     @Column(length = 50)
     private String location;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date startEventDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date endEventDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Timestamp startEventDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Timestamp endEventDate;
     @Column(length = 350)
     private String description;
 

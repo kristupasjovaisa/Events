@@ -19,8 +19,8 @@ CREATE TABLE events
     event_id       UUID         NOT NULL,
     name           VARCHAR(20)  NOT NULL,
     location       VARCHAR(50)  NOT NULL,
-    start_event_date DATE         NOT NULL,
-    end_event_date   DATE         NOT NULL,
+    start_event_date TIMESTAMP         NOT NULL,
+    end_event_date   TIMESTAMP        NOT NULL,
     description    VARCHAR(350) NOT NULL,
     owner_id       BIGINT,
     FOREIGN KEY (owner_id) REFERENCES users (id)
