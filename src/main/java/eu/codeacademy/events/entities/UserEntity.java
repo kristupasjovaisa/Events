@@ -23,9 +23,11 @@ public class UserEntity {
     private Long id;
     private UUID userId;
     @Column(length = 20)
-    private String name;
+    private String nickname;
     @Column(length = 50)
     private String location;
+    @Column(length =50)
+    private String email;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
     @Column(length = 350)
