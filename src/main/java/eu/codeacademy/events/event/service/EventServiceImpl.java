@@ -3,21 +3,24 @@ package eu.codeacademy.events.event.service;
 import eu.codeacademy.events.event.dto.AddEventDto;
 import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
+import eu.codeacademy.events.event.mapper.EventMapper;
 import eu.codeacademy.events.event.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
+    private final EventMapper mapper;
 
     @Override
-    public boolean add(AddEventDto dto) {
-        return false;
+    public UUID add(AddEventDto dto) {
+        return eventRepository.save(mapper.mapTo(dto)).getEventId();
     }
 
     @Override

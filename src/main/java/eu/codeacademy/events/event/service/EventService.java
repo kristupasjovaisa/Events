@@ -5,10 +5,11 @@ import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface EventService {
 
-    boolean add(AddEventDto dto);
+    UUID add(AddEventDto dto);
 
     String update(UpdateEventDto dto);
 
