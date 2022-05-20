@@ -1,5 +1,6 @@
-package eu.codeacademy.events.entities;
+package eu.codeacademy.events.user.entity;
 
+import eu.codeacademy.events.event.entity.EventEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class UserEntity {
     private String email;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
+    @Column(length = 100)
+    private String password;
+    @Column(length = 20)
+    private String phoneNumber;
     @Column(length = 350)
     private String description;
 

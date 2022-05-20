@@ -9,8 +9,9 @@ CREATE TABLE users
     location    VARCHAR(50)  NOT NULL,
     email       VARCHAR(50)  NOT NULL,
     birthday    DATE         NOT NULL,
+    password    VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(20)  NOT NULL,
     description VARCHAR(350) NOT NULL
-
 );
 
 DROP TABLE IF EXISTS events;
@@ -20,6 +21,8 @@ CREATE TABLE events
     event_id              UUID         NOT NULL,
     name                  VARCHAR(20)  NOT NULL,
     location              VARCHAR(50)  NOT NULL,
+    category              VARCHAR(50)  NOT NULL,
+    price                 DECIMAL(20, 2),
     start_event_date_time TIMESTAMP    NOT NULL,
     end_event_date_time   TIMESTAMP    NOT NULL,
     description           VARCHAR(350) NOT NULL,
