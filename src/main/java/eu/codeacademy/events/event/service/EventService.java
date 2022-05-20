@@ -1,12 +1,18 @@
 package eu.codeacademy.events.event.service;
 
-import eu.codeacademy.events.event.repository.EventRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import eu.codeacademy.events.event.dto.AddEventDto;
+import eu.codeacademy.events.event.dto.EventDto;
+import eu.codeacademy.events.event.dto.UpdateEventDto;
 
-@Service
-@RequiredArgsConstructor
-public class EventService {
+import java.util.List;
 
-    private final EventRepository eventRepository;
+public interface EventService {
+
+    boolean add(AddEventDto dto);
+
+    String update(UpdateEventDto dto);
+
+    Long remove(Long id);
+
+    List<EventDto> getAll();
 }
