@@ -29,13 +29,12 @@ public class EventService {
     }
 
     @Transactional
-    public boolean update(UpdateEventDto dto) {
+    public EventDto update(UpdateEventDto dto) {
         Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
-            eventRepository.save(mapper.mapTo(dto));
-            return true;
+            return mapper.mapTo(eventRepository.save(mapper.mapTo(dto)));
         }
-        return false;
+        return null;
     }
 
     @Transactional
