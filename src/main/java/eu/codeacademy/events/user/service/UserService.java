@@ -29,13 +29,12 @@ public class UserService {
     }
 
     @Transactional
-    public boolean update(UpdateUserDto dto) {
+    public UserDto update(UpdateUserDto dto) {
         Optional<UserEntity> userOptional = userRepository.findByUserId(dto.getUserId());
         if (userOptional.isPresent()) {
-            userRepository.save(mapper.mapTo(dto));
-            return true;
+            return mapper.mapTo(userRepository.save(mapper.mapTo(dto)));
         }
-        return false;
+        return null;
     }
 
     @Transactional
