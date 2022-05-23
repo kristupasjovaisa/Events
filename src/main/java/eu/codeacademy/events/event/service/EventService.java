@@ -52,7 +52,7 @@ public class EventService {
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
 
-    public List<EventDto> getAll() {
+    public List<EventDto> getAllEvents() {
         var list = eventRepository.findAll();
         if (list != null) {
             return list.stream()

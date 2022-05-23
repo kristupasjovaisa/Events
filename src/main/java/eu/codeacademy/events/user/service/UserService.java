@@ -52,7 +52,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public List<UserDto> getAll() {
+    public List<UserDto> getAllUsers() {
         var list = userRepository.findAll();
         if (list != null) {
             return list.stream()
