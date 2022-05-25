@@ -13,7 +13,6 @@ public class EventMapper {
 
     public EventEntity mapTo(AddEventDto dto) {
         return EventEntity.builder().
-                eventId(dto.getEventId()).
                 name(dto.getName()).
                 location(dto.getLocation()).
                 category(dto.getCategory()).

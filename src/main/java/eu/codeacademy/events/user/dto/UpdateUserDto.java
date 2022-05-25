@@ -9,7 +9,6 @@ import java.util.UUID;
 @Getter
 public class UpdateUserDto {
 
-    private Long id;
     private UUID userId;
     private String nickname;
     private String location;
