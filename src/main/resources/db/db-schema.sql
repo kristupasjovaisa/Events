@@ -3,15 +3,15 @@ DROP TABLE IF EXISTS users_events;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
-    id          BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id     UUID         NOT NULL,
-    nickname    VARCHAR(20)  NOT NULL,
-    location    VARCHAR(50)  NOT NULL,
-    email       VARCHAR(50)  NOT NULL,
-    birthday    DATE         NOT NULL,
-    password    VARCHAR(100) NOT NULL,
+    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id      UUID         NOT NULL,
+    nickname     VARCHAR(20)  NOT NULL,
+    location     VARCHAR(50)  NOT NULL,
+    email        VARCHAR(50)  NOT NULL,
+    birthday     DATE         NOT NULL,
+    password     VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20)  NOT NULL,
-    description VARCHAR(350) NOT NULL
+    description  VARCHAR(350) NOT NULL
 );
 
 DROP TABLE IF EXISTS events;
@@ -32,8 +32,8 @@ CREATE TABLE events
 
 CREATE TABLE events_users
 (
-    users_id  BIGINT,
-    events_id BIGINT,
+    users_id  BIGINT NOT NULL,
+    events_id BIGINT NOT NULL,
     FOREIGN KEY (users_id) REFERENCES users (id),
     FOREIGN KEY (events_id) REFERENCES events (id)
 );

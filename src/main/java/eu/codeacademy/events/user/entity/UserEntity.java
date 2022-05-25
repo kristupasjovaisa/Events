@@ -1,10 +1,7 @@
 package eu.codeacademy.events.user.entity;
 
 import eu.codeacademy.events.event.entity.EventEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -35,6 +32,8 @@ public class UserEntity {
     private String password;
     @Column(length = 20)
     private String phoneNumber;
+
+
     @Column(length = 350)
     private String description;
 
@@ -43,5 +42,4 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "owner")
     private Set<EventEntity> createdEvents;
-
 }

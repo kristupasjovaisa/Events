@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
+
 @Component
 public class UserMapper {
 
     public UserEntity mapTo(AddUserDto dto) {
         return UserEntity.builder().
-                userId(dto.getUserId()).
                 nickname(dto.getNickname()).
                 location(dto.getLocation()).
                 email(dto.getEmail()).
