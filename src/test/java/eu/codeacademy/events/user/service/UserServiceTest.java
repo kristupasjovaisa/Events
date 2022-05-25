@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -90,5 +92,19 @@ class UserServiceTest {
 
     @Test
     void getAllUsers() {
+        List<UserEntity> list = new ArrayList<>();
+        UserEntity user1 = UserEntity.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358")).
+                build();
+        list.add(user1);
+
+        UserDto userDto = UserDto.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
+                .build();
+
+        Mockito.when(userRepository.findAll()).thenReturn(list);
+        Mockito.when(userMapper.mapTo(user1)).thenReturn(userDto);
+
+        List<UserDto> actual = userService.getAllUsers();
+        Assertions.assertThat(actual.get(0).getUserId()).isEqualTo(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
+        Assertions.assertThat(actual.size()).isEqualTo(1);
     }
 }
