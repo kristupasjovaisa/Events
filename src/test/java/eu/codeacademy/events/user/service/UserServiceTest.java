@@ -1,6 +1,7 @@
 package eu.codeacademy.events.user.service;
 
 import eu.codeacademy.events.user.dto.AddUserDto;
+import eu.codeacademy.events.user.dto.UpdateUserDto;
 import eu.codeacademy.events.user.dto.UserDto;
 import eu.codeacademy.events.user.entity.UserEntity;
 import eu.codeacademy.events.user.mapper.UserMapper;
@@ -34,6 +35,7 @@ class UserServiceTest {
     @Test
     @DisplayName("Shoud add Users")
     void add() {
+
         UserEntity user = UserEntity
                 .builder()
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
@@ -59,11 +61,37 @@ class UserServiceTest {
     @DisplayName("Shoud update User by id")
     void update() {
 
+        UserEntity user = UserEntity
+                .builder()
+                .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
+                .build();
+
+        UserEntity updatedUser = UserEntity
+                .builder()
+                .userId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+                .build();
+
+        UpdateUserDto updateUserDto = UpdateUserDto.builder()
+                .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
+                .build();
+
+        UserDto updatedUserDto = UserDto
+                .builder()
+                .userId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+                .build();
+
+        Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
+        Mockito.when(userMapper.mapTo(updateUserDto)).thenReturn(user);
+        Mockito.when(userRepository.save(user)).thenReturn(updatedUser);
+        Mockito.when(userMapper.mapTo(updatedUser)).thenReturn(updatedUserDto);
+        UserDto actual = userService.update(updateUserDto);
+        Assertions.assertThat(actual.getUserId()).isEqualTo(UUID.fromString("00000000-0000-0000-0000-000000000000"));
     }
 
     @Test
     @DisplayName("Shoud delete User by Id")
     void delete() {
+
         UserEntity user = UserEntity.builder()
                 .id(1l)
                 .build();
@@ -92,6 +120,7 @@ class UserServiceTest {
 
     @Test
     void getAllUsers() {
+
         List<UserEntity> list = new ArrayList<>();
         UserEntity user1 = UserEntity.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358")).
                 build();
