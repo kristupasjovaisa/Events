@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Events</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${events}" class="container my-5">
+                <p class="my-5">
+                    <a href="/add-event" class="btn btn-primary">
+                        <i class="fa-solid fa-circle-plus"> Add Event </i></a>
+                </p>
+                <div class="col-md-12">
+                    <h2 th:case="null">No event found !!</h2>
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th scope="col">Event name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Price € </th>
+                                <th scope="col">Start event</th>
+                                <th scope="col">End event</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="events : ${events}">
+                                <td th:text="${events.name}"></td>
+                                <td th:text="${events.location}"></td>
+                                <td th:text="${events.category}"></td>
+                                <td th:text="${events.price}"></td>
+                                <td th:text="${events.startEventDateTime}"></td>
+                                <td th:text="${events.endEventDateTime}"></td>
+                                <td th:text="${events.description}"></td>
+                                <td><a th:href="@{/update-event/{id}(id=${events.getEventId()})}" class="btn btn-primary"><i
+                                        class="fas fa-edit ml-2"></i></a></td>
+                                <td><a th:href="@{/remove-event/{id}(id=${events.getEventId()})}" class="btn btn-primary"><i
+                                        class="fa-solid fa-circle-minus ml-2"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
