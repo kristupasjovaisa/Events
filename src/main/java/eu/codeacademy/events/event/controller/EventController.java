@@ -30,4 +30,11 @@ public class EventController {
         model.addAttribute("event", event);
         return "list-event";
     }
+
+    @GetMapping("delete/{id}")
+    public String deleteEvent(@PathVariable UUID id, Model model){
+        eventService.delete(id);
+        model.addAttribute("events", eventService.getAllEvents());
+        return "events";
+    }
 }
