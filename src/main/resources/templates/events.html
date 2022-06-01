@@ -35,23 +35,20 @@
                                 <th scope="col">Start event</th>
                                 <th scope="col">End event</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col">Detail</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="events : ${events}">
-                                <td th:text="${events.name}"></td>
-                                <td th:text="${events.location}"></td>
-                                <td th:text="${events.category}"></td>
-                                <td th:text="${events.price}"></td>
-                                <td th:text="${events.startEventDateTime}"></td>
-                                <td th:text="${events.endEventDateTime}"></td>
-                                <td th:text="${events.description}"></td>
-                                <td><a th:href="@{/update-event/{id}(id=${events.getEventId()})}" class="btn btn-primary"><i
-                                        class="fas fa-edit ml-2"></i></a></td>
-                                <td><a th:href="@{/remove-event/{id}(id=${events.getEventId()})}" class="btn btn-primary"><i
-                                        class="fa-solid fa-circle-minus ml-2"></i></a></td>
+                            <tr th:each="event : ${events}">
+                                <td th:text="${event.name}"></td>
+                                <td th:text="${event.location}"></td>
+                                <td th:text="${event.category}"></td>
+                                <td th:text="${event.price}"></td>
+                                <td th:text="${event.startEventDateTime}"></td>
+                                <td th:text="${event.endEventDateTime}"></td>
+                                <td th:text="${event.description}"></td>
+                                <td><a th:href="@{/event/{id}(id=${event.getEventId()})}" class="btn btn-primary"><i
+                                        class="fas fa-eye ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
