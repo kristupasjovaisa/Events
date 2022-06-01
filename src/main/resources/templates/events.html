@@ -36,6 +36,7 @@
                                 <th scope="col">End event</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Detail</th>
+                                <th scope="col">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,8 @@
                                 <td th:text="${event.description}"></td>
                                 <td><a th:href="@{/event/{id}(id=${event.getEventId()})}" class="btn btn-primary"><i
                                         class="fas fa-eye ml-2"></i></a></td>
+                                <td><a th:href="@{/delete/{id}(id=${event.getEventId()})}" class="btn btn-primary"><i
+                                        class="fa-solid fa-circle-minus ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
