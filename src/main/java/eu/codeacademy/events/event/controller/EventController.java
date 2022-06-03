@@ -57,4 +57,10 @@ public class EventController {
         model.addAttribute("events", eventService.getAllEvents());
         return "redirect:/events";
     }
+
+    @GetMapping("/add")
+    public String addEvent(Model model){
+        return "add-event";
+    }
+    
 }
