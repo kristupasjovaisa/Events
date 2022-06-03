@@ -43,17 +43,16 @@ public class EventController {
 
     @GetMapping("/update/{id}")
     public String updateEvent(@PathVariable UUID id, Model model) {
-        EventDto event = eventService.getEventByUUID(id);
-        model.addAttribute("event", event);
+        model.addAttribute("event", eventService.getEventByUUID(id));
         return "update-event";
     }
 
     @PostMapping("/save-update/{id}")
-    public String updateEvent(@PathVariable UpdateEventDto event, BindingResult result, Model model) {
+    public String updateEvent(@PathVariable UUID id, UpdateEventDto event, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "update-event";
         }
-
+        event.setEventId(id);
         eventService.update(event);
         model.addAttribute("events", eventService.getAllEvents());
         return "redirect:/events";
