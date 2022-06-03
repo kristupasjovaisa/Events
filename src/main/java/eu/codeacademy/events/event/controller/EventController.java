@@ -26,7 +26,7 @@ public class EventController {
 
     @GetMapping("/event/{id}")
     public String findEvent(@PathVariable UUID id, Model model) {
-        var event = eventService.getEventByUUID(id);
+        EventDto event = eventService.getEventByUUID(id);
         model.addAttribute("event", event);
         return "list-event";
     }
@@ -36,5 +36,12 @@ public class EventController {
         eventService.delete(id);
         model.addAttribute("events", eventService.getAllEvents());
         return "events";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateEvent(@PathVariable UUID id, Model model){
+        EventDto event = eventService.getEventByUUID(id);
+        model.addAttribute("event",event);
+        return "update-event";
     }
 }
