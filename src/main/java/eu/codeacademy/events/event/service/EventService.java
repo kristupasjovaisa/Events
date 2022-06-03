@@ -32,7 +32,7 @@ public class EventService {
     public EventDto update(UpdateEventDto dto) {
         Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
-            return mapper.mapTo(eventRepository.save(mapper.mapTo(dto)));
+            return mapper.mapTo(eventRepository.save(mapper.mapTo(dto,eventOptional.get().getId())));
         }
         return null;
     }

@@ -23,8 +23,9 @@ public class EventMapper {
                 .build();
     }
 
-    public EventEntity mapTo(UpdateEventDto dto) {
+    public EventEntity mapTo(UpdateEventDto dto, Long id) {
         return EventEntity.builder().
+                id(id).
                 eventId(dto.getEventId()).
                 name(dto.getName()).
                 location(dto.getLocation()).
