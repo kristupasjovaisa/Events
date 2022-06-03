@@ -1,5 +1,6 @@
 package eu.codeacademy.events.event.controller;
 
+import eu.codeacademy.events.event.dto.AddEventDto;
 import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
 import eu.codeacademy.events.event.service.EventService;
@@ -62,5 +63,14 @@ public class EventController {
     public String addEvent(Model model){
         return "add-event";
     }
-    
+
+    @PostMapping("/save-event")
+    public String saveEvent(AddEventDto event, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-event";
+        }
+        eventService.add(event);
+        model.addAttribute("events", eventService.getAllEvents());
+        return "redirect:/events";
+    }
 }
