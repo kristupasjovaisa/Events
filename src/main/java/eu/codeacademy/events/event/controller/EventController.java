@@ -1,12 +1,15 @@
 package eu.codeacademy.events.event.controller;
 
 import eu.codeacademy.events.event.dto.EventDto;
+import eu.codeacademy.events.event.dto.UpdateEventDto;
 import eu.codeacademy.events.event.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,16 +35,27 @@ public class EventController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteEvent(@PathVariable UUID id, Model model){
+    public String deleteEvent(@PathVariable UUID id, Model model) {
         eventService.delete(id);
         model.addAttribute("events", eventService.getAllEvents());
         return "events";
     }
 
     @GetMapping("/update/{id}")
-    public String updateEvent(@PathVariable UUID id, Model model){
+    public String updateEvent(@PathVariable UUID id, Model model) {
         EventDto event = eventService.getEventByUUID(id);
-        model.addAttribute("event",event);
+        model.addAttribute("event", event);
         return "update-event";
+    }
+
+    @PostMapping("/save-update/{id}")
+    public String updateEvent(@PathVariable UpdateEventDto event, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "update-event";
+        }
+
+        eventService.update(event);
+        model.addAttribute("events", eventService.getAllEvents());
+        return "redirect:/events";
     }
 }
