@@ -82,7 +82,7 @@ class EventServiceTest {
                 .build();
 
         Mockito.when(eventRepository.findByEventId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(event));
-        Mockito.when(eventMapper.mapTo(updateEventDto)).thenReturn(event);
+        Mockito.when(eventMapper.mapTo(updateEventDto, updatedEvent.getId())).thenReturn(event);
         Mockito.when(eventRepository.save(event)).thenReturn(updatedEvent);
         Mockito.when(eventMapper.mapTo(updatedEvent)).thenReturn(updatedEventDto);
         EventDto actual = eventService.update(updateEventDto);
