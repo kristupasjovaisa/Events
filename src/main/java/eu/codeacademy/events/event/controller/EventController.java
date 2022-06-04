@@ -59,8 +59,9 @@ public class EventController {
         return "redirect:/events";
     }
 
-    @GetMapping("/add")
-    public String addEvent(Model model){
+    @GetMapping("/add-event")
+    public String addEvent(AddEventDto event, Model model) {
+        model.addAttribute("event", event);
         return "add-event";
     }
 
