@@ -7,12 +7,14 @@ import eu.codeacademy.events.event.entity.EventEntity;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @Component
 public class EventMapper {
 
     public EventEntity mapTo(AddEventDto dto) {
         return EventEntity.builder().
+                eventId(UUID.randomUUID()).
                 name(dto.getName()).
                 location(dto.getLocation()).
                 category(dto.getCategory()).
