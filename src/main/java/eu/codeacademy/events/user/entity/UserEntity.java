@@ -1,11 +1,12 @@
 package eu.codeacademy.events.user.entity;
 
 import eu.codeacademy.events.event.entity.EventEntity;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,8 +27,6 @@ public class UserEntity {
     private String location;
     @Column(length =50)
     private String email;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date birthday;
     @Column(length = 100)
     private String password;
     @Column(length = 20)

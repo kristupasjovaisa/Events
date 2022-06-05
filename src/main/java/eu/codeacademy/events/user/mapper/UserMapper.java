@@ -6,7 +6,7 @@ import eu.codeacademy.events.user.dto.UserDto;
 import eu.codeacademy.events.user.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.UUID;
 
 
 @Component
@@ -14,10 +14,10 @@ public class UserMapper {
 
     public UserEntity mapTo(AddUserDto dto) {
         return UserEntity.builder().
+                userId(UUID.randomUUID()).
                 nickname(dto.getNickname()).
                 location(dto.getLocation()).
                 email(dto.getEmail()).
-                birthday(Date.valueOf(dto.getBirthday())).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
                 build();
@@ -29,7 +29,6 @@ public class UserMapper {
                 nickname(dto.getNickname()).
                 location(dto.getLocation()).
                 email(dto.getEmail()).
-                birthday(Date.valueOf(dto.getBirthday())).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
                 build();
@@ -41,7 +40,6 @@ public class UserMapper {
                 nickname(user.getNickname()).
                 location(user.getLocation()).
                 email(user.getEmail()).
-                birthday(String.valueOf(user.getBirthday())).
                 password(user.getPassword()).
                 phoneNumber(user.getPhoneNumber()).
                 build();

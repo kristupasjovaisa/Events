@@ -13,7 +13,6 @@ public class UserDto {
     private String nickname;
     private String location;
     private String email;
-    private String birthday;
     private String password;
     private String phoneNumber;
 }
