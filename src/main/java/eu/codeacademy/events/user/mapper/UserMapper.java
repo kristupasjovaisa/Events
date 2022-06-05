@@ -20,8 +20,7 @@ public class UserMapper {
                 birthday(Date.valueOf(dto.getBirthday())).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
-                description(dto.getDescription())
-                .build();
+                build();
     }
 
     public UserEntity mapTo(UpdateUserDto dto) {
@@ -33,8 +32,7 @@ public class UserMapper {
                 birthday(Date.valueOf(dto.getBirthday())).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
-                description(dto.getDescription())
-                .build();
+                build();
     }
 
     public UserDto mapTo(UserEntity user) {
@@ -46,7 +44,6 @@ public class UserMapper {
                 birthday(String.valueOf(user.getBirthday())).
                 password(user.getPassword()).
                 phoneNumber(user.getPhoneNumber()).
-                description(user.getDescription())
-                .build();
+                build();
     }
 }

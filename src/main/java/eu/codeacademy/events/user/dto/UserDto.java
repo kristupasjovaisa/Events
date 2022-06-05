@@ -16,5 +16,4 @@ public class UserDto {
     private String birthday;
     private String password;
     private String phoneNumber;
-    private String description;
 }

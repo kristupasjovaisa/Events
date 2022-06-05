@@ -33,10 +33,6 @@ public class UserEntity {
     @Column(length = 20)
     private String phoneNumber;
 
-
-    @Column(length = 350)
-    private String description;
-
     @ManyToMany(mappedBy = "users")
     private Set<EventEntity> events;
 
