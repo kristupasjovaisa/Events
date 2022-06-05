@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(length = 20)
     private String nickname;
     @Column(length = 50)
-    private String location;
+    private String city;
     @Column(length =50)
     private String email;
     @Column(length = 100)

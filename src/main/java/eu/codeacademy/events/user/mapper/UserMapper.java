@@ -16,7 +16,7 @@ public class UserMapper {
         return UserEntity.builder().
                 userId(UUID.randomUUID()).
                 nickname(dto.getNickname()).
-                location(dto.getLocation()).
+                city(dto.getCity()).
                 email(dto.getEmail()).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
@@ -27,7 +27,7 @@ public class UserMapper {
         return UserEntity.builder().
                 userId(dto.getUserId()).
                 nickname(dto.getNickname()).
-                location(dto.getLocation()).
+                city(dto.getCity()).
                 email(dto.getEmail()).
                 password(dto.getPassword()).
                 phoneNumber(dto.getPhoneNumber()).
@@ -38,7 +38,7 @@ public class UserMapper {
         return UserDto.builder().
                 userId(user.getUserId()).
                 nickname(user.getNickname()).
-                location(user.getLocation()).
+                city(user.getCity()).
                 email(user.getEmail()).
                 password(user.getPassword()).
                 phoneNumber(user.getPhoneNumber()).
