@@ -18,12 +18,12 @@
         <div class="row">
             <div class="form-group col-md-8">
                 <label class="col-form-label">Nickname</label>
-                <input type="nickname" th:field="*{nickname}" required minlength="5" maxlength="15" class="form-control" id="nickname"
+                <input type="text" th:field="*{nickname}" required minlength="5" maxlength="15" class="form-control" id="nickname"
                        placeholder="Nickname"/>
             </div>
             <div class="form-group col-md-8">
                 <label class="col-form-label">Location</label>
-                <input type="location" th:field="*{location}" required class="form-control" id="location"
+                <input type="text" th:field="*{location}" required class="form-control" id="location"
                        placeholder="Location"/>
             </div>
 
@@ -34,12 +34,6 @@
             </div>
 
             <div class="form-group col-md-8">
-                <label class="col-form-label">Birthday</label>
-                <input type="birthday" th:field="*{birthday}" required class="form-control" id="birthday"
-                       placeholder="Birthday"/>
-            </div>
-
-            <div class="form-group col-md-8">
                 <label class="col-form-label">Password</label>
                 <input type="password" th:field="*{password}" required minlength="7" maxlength="15" class="form-control" id="password"
                        placeholder="Password"/>
@@ -47,8 +41,9 @@
 
             <div class="form-group col-md-8">
                 <label class="col-form-label">Phone number</label>
-                <input type="phoneNumber" th:field="*{phoneNumber}" required class="form-control" id="phoneNumber"
+                <input type="text" th:field="*{phoneNumber}" minlength="12" maxlength="12" required class="form-control" id="phoneNumber"
                        placeholder="Phone number"/>
+                <small>Format:+370</small>
             </div>
 
             <div class="col-md-6 mt-4">
