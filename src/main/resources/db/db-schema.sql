@@ -10,8 +10,7 @@ CREATE TABLE users
     email        VARCHAR(50)  NOT NULL,
     birthday     DATE         NOT NULL,
     password     VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20)  NOT NULL,
-    description  VARCHAR(350) NOT NULL
+    phone_number VARCHAR(20)  NOT NULL
 );
 
 DROP TABLE IF EXISTS events;
