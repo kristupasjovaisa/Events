@@ -11,10 +11,8 @@ public class UpdateUserDto {
 
     private UUID userId;
     private String nickname;
-    private String location;
+    private String city;
     private String email;
-    private String birthday;
     private String password;
     private String phoneNumber;
-    private String description;
 }

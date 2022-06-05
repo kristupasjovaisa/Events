@@ -1,12 +1,10 @@
-INSERT INTO users(user_id, nickname, location, email, birthday, password, phone_number, description)
-VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'Petras', 'Panevezys', 'af@gmail.com', '2004-04-04', 'slaptazodis',
-        '+37066655584', 'vakarelis1'),
-       ('e4dbc123-a7c2-4bee-a519-e1b9ba991342', 'Antanas', 'Kaunas', 'gf@gmail.com', '2005-05-05', 'slaptazodis',
-        '+37066655884',
-        'vakarelis2'),
-       ('e4dbc123-a7c2-4bee-a519-e1b9ba991343', 'Darius', 'Vilnius', 'mf@gmail.com', '2006-06-06', 'slaptazodis',
-        '+37066655784',
-        'vakarelis3');
+INSERT INTO users(user_id, nickname, city, email, password, phone_number)
+VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'Petras', 'Panevezys', 'af@gmail.com', 'slaptazodis',
+        '+37066655584'),
+       ('e4dbc123-a7c2-4bee-a519-e1b9ba991342', 'Antanas', 'Kaunas', 'gf@gmail.com','slaptazodis',
+        '+37066655884'),
+       ('e4dbc123-a7c2-4bee-a519-e1b9ba991343', 'Darius', 'Vilnius', 'mf@gmail.com', 'slaptazodis',
+        '+37066655784');
 
 INSERT INTO events(event_id, name, location, category, price, start_event_date_time, end_event_date_time, description,
                    owner_id)
