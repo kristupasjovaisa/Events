@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS users_events;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
-    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id           BIGSERIAL PRIMARY KEY,
     user_id      UUID         NOT NULL,
     nickname     VARCHAR(20)  NOT NULL,
     city         VARCHAR(50)  NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE users
 DROP TABLE IF EXISTS events;
 CREATE TABLE events
 (
-    id                    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                    BIGSERIAL PRIMARY KEY,
     event_id              UUID         NOT NULL,
     name                  VARCHAR(20)  NOT NULL,
     location              VARCHAR(50)  NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE events
     start_event_date_time TIMESTAMP    NOT NULL,
     end_event_date_time   TIMESTAMP    NOT NULL,
     description           VARCHAR(350) NOT NULL,
-    owner_id              BIGINT,
+    owner_id              BIGSERIAL,
     FOREIGN KEY (owner_id) REFERENCES users (id)
 );
 
