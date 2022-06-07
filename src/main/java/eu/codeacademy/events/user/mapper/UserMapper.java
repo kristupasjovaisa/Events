@@ -13,7 +13,7 @@ import java.util.UUID;
 @Component
 public class UserMapper {
 
-    public UserEntity mapTo(AddUserDto dto) {
+    public UserEntity mapFrom(AddUserDto dto) {
         return UserEntity.builder().
                 userId(UUID.randomUUID()).
                 nickname(dto.getNickname()).
@@ -24,7 +24,7 @@ public class UserMapper {
                 build();
     }
 
-    public UserEntity mapTo(UpdateUserDto dto) {
+    public UserEntity mapFrom(UpdateUserDto dto) {
         return UserEntity.builder().
                 userId(dto.getUserId()).
                 nickname(dto.getNickname()).
@@ -35,7 +35,7 @@ public class UserMapper {
                 build();
     }
 
-    public UserDto mapTo(UserEntity user) {
+    public UserDto mapFrom(UserEntity user) {
         return UserDto.builder().
                 userId(user.getUserId()).
                 nickname(user.getNickname()).
