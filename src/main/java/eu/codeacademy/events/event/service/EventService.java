@@ -25,14 +25,14 @@ public class EventService {
     private final EventMapper mapper;
 
     public EventDto add(AddEventDto dto) {
-        return mapper.mapTo(eventRepository.save(mapper.mapTo(dto)));
+        return mapper.mapFrom(eventRepository.save(mapper.mapFrom(dto)));
     }
 
     @Transactional
     public EventDto update(UpdateEventDto dto) {
         Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
-            return mapper.mapTo(eventRepository.save(mapper.mapTo(dto,eventOptional.get().getId())));
+            return mapper.mapFrom(eventRepository.save(mapper.mapFrom(dto,eventOptional.get().getId())));
         }
         return null;
     }
@@ -48,7 +48,7 @@ public class EventService {
     }
 
     public EventDto getEventByUUID(UUID id) {
-        return eventRepository.findByEventId(id).map(mapper::mapTo)
+        return eventRepository.findByEventId(id).map(mapper::mapFrom)
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
 
@@ -56,7 +56,7 @@ public class EventService {
         var list = eventRepository.findAll();
         if (list != null) {
             return list.stream()
-                    .map(mapper::mapTo)
+                    .map(mapper::mapFrom)
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();

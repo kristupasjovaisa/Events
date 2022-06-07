@@ -12,7 +12,7 @@ import java.util.UUID;
 @Component
 public class EventMapper {
 
-    public EventEntity mapTo(AddEventDto dto) {
+    public EventEntity mapFrom(AddEventDto dto) {
         return EventEntity.builder().
                 eventId(UUID.randomUUID()).
                 name(dto.getName()).
@@ -25,7 +25,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventEntity mapTo(UpdateEventDto dto, Long id) {
+    public EventEntity mapFrom(UpdateEventDto dto, Long id) {
         return EventEntity.builder().
                 id(id).
                 eventId(dto.getEventId()).
@@ -39,7 +39,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventDto mapTo(EventEntity event) {
+    public EventDto mapFrom(EventEntity event) {
         return EventDto.builder().
                 eventId(event.getEventId()).
                 name(event.getName()).
