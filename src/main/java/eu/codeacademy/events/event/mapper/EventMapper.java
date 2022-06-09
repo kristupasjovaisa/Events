@@ -4,6 +4,7 @@ import eu.codeacademy.events.event.dto.AddEventDto;
 import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
 import eu.codeacademy.events.event.entity.EventEntity;
+import eu.codeacademy.events.utils.SecurityUtils;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -49,6 +50,7 @@ public class EventMapper {
                 startEventDateTime(String.valueOf(event.getStartEventDateTime())).
                 endEventDateTime(String.valueOf(event.getEndEventDateTime())).
                 description(event.getDescription())
+                .isEditEnabled(event.getOwner().getUserId().equals(SecurityUtils.getUser().getUserId()))
                 .build();
     }
 }
