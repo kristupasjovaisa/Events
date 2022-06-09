@@ -49,6 +49,7 @@ public class UserMapper {
     public UserRoleDto mapUserRoleFrom(UserEntity user) {
         return UserRoleDto.builder()
                 .user(UserDto.builder()
+                        .userId(user.getUserId())
                         .nickname(user.getNickname())
                         .city(user.getCity())
                         .email(user.getEmail())
