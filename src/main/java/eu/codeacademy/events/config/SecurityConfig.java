@@ -56,7 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .usernameParameter("nickname")
+                .loginPage("/login-events")
+                .loginProcessingUrl("/login-events")
+                .usernameParameter("loginNickname")
+                .passwordParameter("loginPassword")
                 .defaultSuccessUrl("/",true)
                 .permitAll()
                 .and()
@@ -64,21 +67,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
     }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception{
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin()
-//                .permitAll()
-//                .loginPage("/login-events")
-//                .loginProcessingUrl("/login-events")
-//                .defaultSuccessUrl("/",true)
-//                .usernameParameter("loginNickname")
-//                .passwordParameter("loginPassword");
-//    }
 }
