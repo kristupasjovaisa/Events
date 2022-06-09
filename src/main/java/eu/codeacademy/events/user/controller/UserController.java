@@ -3,6 +3,7 @@ package eu.codeacademy.events.user.controller;
 import eu.codeacademy.events.user.dto.AddUserDto;
 import eu.codeacademy.events.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,9 @@ public class UserController {
         if (result.hasErrors()){
             return "signup-form";
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userService.add(user);
         return "register-success";
     }
