@@ -8,6 +8,7 @@ import eu.codeacademy.events.event.exception.EventNotFoundException;
 import eu.codeacademy.events.event.mapper.EventMapper;
 import eu.codeacademy.events.event.repository.EventRepository;
 import eu.codeacademy.events.user.repository.UserRepository;
+import eu.codeacademy.events.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +29,11 @@ public class EventService {
 
     public EventDto add(AddEventDto dto) {
         var event = mapper.mapFrom(dto);
-        var owner = userRepository.findByUserId(dto.getOwnerId());
+        var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
         if (owner.isPresent()) {
             event.setOwner(owner.get());
         }
-        return mapper.mapFrom(eventRepository.save(mapper.mapFrom(dto)));
+        return mapper.mapFrom(eventRepository.save(event));
     }
 
     @Transactional
