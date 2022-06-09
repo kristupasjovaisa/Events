@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users_events;
-
+DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS users;
+
 CREATE TABLE users
 (
     id           BIGSERIAL PRIMARY KEY,
@@ -12,7 +13,6 @@ CREATE TABLE users
     phone_number VARCHAR(20)  NOT NULL
 );
 
-DROP TABLE IF EXISTS events;
 CREATE TABLE events
 (
     id                    BIGSERIAL PRIMARY KEY,

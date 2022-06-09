@@ -1,12 +1,14 @@
 package eu.codeacademy.events.user.dto;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @Builder
+@Getter
 public class UserRoleDto implements UserDetails {
 
     private UserDto user;

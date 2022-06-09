@@ -1,10 +1,7 @@
 package eu.codeacademy.events.event.entity;
 
 import eu.codeacademy.events.user.entity.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 @Entity
 @Table(name = "events")
 public class EventEntity {

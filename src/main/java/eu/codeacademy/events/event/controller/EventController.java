@@ -4,6 +4,7 @@ import eu.codeacademy.events.event.dto.AddEventDto;
 import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
 import eu.codeacademy.events.event.service.EventService;
+//import eu.codeacademy.events.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +71,7 @@ public class EventController {
         if (result.hasErrors()) {
             return "add-event";
         }
+        System.out.println("EVENTAS " + event);
         eventService.add(event);
         model.addAttribute("events", eventService.getAllEvents());
         return "redirect:/events";
