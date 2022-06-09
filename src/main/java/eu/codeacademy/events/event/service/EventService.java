@@ -40,8 +40,14 @@ public class EventService {
     public EventDto update(UpdateEventDto dto) {
         Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
-            return mapper.mapFrom(eventRepository.save(mapper.mapFrom(dto, eventOptional.get().getId())));
+            var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
+            var event = mapper.mapFrom(dto, eventOptional.get().getId());
+            if (owner.isPresent()) {
+                event.setOwner(owner.get());
+            }
+            return mapper.mapFrom(eventRepository.save(event));
         }
+
         return null;
     }
 
