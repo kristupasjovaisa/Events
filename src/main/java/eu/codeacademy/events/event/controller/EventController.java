@@ -18,6 +18,7 @@ import java.util.UUID;
 @Controller
 @RequiredArgsConstructor
 public class EventController {
+
     private final EventService eventService;
 
 

@@ -3,6 +3,7 @@ package eu.codeacademy.events.user.mapper;
 import eu.codeacademy.events.user.dto.AddUserDto;
 import eu.codeacademy.events.user.dto.UpdateUserDto;
 import eu.codeacademy.events.user.dto.UserDto;
+import eu.codeacademy.events.user.dto.UserRoleDto;
 import eu.codeacademy.events.user.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Component
 public class UserMapper {
 
-    public UserEntity mapTo(AddUserDto dto) {
+    public UserEntity mapFrom(AddUserDto dto) {
         return UserEntity.builder().
                 userId(UUID.randomUUID()).
                 nickname(dto.getNickname()).
@@ -23,7 +24,7 @@ public class UserMapper {
                 build();
     }
 
-    public UserEntity mapTo(UpdateUserDto dto) {
+    public UserEntity mapFrom(UpdateUserDto dto) {
         return UserEntity.builder().
                 userId(dto.getUserId()).
                 nickname(dto.getNickname()).
@@ -34,7 +35,7 @@ public class UserMapper {
                 build();
     }
 
-    public UserDto mapTo(UserEntity user) {
+    public UserDto mapFrom(UserEntity user) {
         return UserDto.builder().
                 userId(user.getUserId()).
                 nickname(user.getNickname()).
@@ -43,5 +44,17 @@ public class UserMapper {
                 password(user.getPassword()).
                 phoneNumber(user.getPhoneNumber()).
                 build();
+    }
+
+    public UserRoleDto mapUserRoleFrom(UserEntity user) {
+        return UserRoleDto.builder()
+                .user(UserDto.builder()
+                        .userId(user.getUserId())
+                        .nickname(user.getNickname())
+                        .city(user.getCity())
+                        .email(user.getEmail())
+                        .password(user.getPassword())
+                        .phoneNumber(user.getPhoneNumber())
+                        .build()).build();
     }
 }

@@ -4,6 +4,7 @@ import eu.codeacademy.events.event.dto.AddEventDto;
 import eu.codeacademy.events.event.dto.EventDto;
 import eu.codeacademy.events.event.dto.UpdateEventDto;
 import eu.codeacademy.events.event.entity.EventEntity;
+import eu.codeacademy.events.utils.SecurityUtils;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Component
 public class EventMapper {
 
-    public EventEntity mapTo(AddEventDto dto) {
+    public EventEntity mapFrom(AddEventDto dto) {
         return EventEntity.builder().
                 eventId(UUID.randomUUID()).
                 name(dto.getName()).
@@ -25,7 +26,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventEntity mapTo(UpdateEventDto dto, Long id) {
+    public EventEntity mapFrom(UpdateEventDto dto, Long id) {
         return EventEntity.builder().
                 id(id).
                 eventId(dto.getEventId()).
@@ -39,7 +40,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventDto mapTo(EventEntity event) {
+    public EventDto mapFrom(EventEntity event) {
         return EventDto.builder().
                 eventId(event.getEventId()).
                 name(event.getName()).
@@ -49,6 +50,7 @@ public class EventMapper {
                 startEventDateTime(String.valueOf(event.getStartEventDateTime())).
                 endEventDateTime(String.valueOf(event.getEndEventDateTime())).
                 description(event.getDescription())
+                .isEditEnabled(event.getOwner().getUserId().equals(SecurityUtils.getUser().getUserId()))
                 .build();
     }
 }

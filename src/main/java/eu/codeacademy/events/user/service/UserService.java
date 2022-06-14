@@ -24,14 +24,14 @@ public class UserService {
     private final UserMapper mapper;
 
     public UserDto add(AddUserDto dto) {
-        return mapper.mapTo(userRepository.save(mapper.mapTo(dto)));
+        return mapper.mapFrom(userRepository.save(mapper.mapFrom(dto)));
     }
 
     @Transactional
     public UserDto update(UpdateUserDto dto) {
         Optional<UserEntity> userOptional = userRepository.findByUserId(dto.getUserId());
         if (userOptional.isPresent()) {
-            return mapper.mapTo(userRepository.save(mapper.mapTo(dto)));
+            return mapper.mapFrom(userRepository.save(mapper.mapFrom(dto)));
         }
         return null;
     }
@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public UserDto getUserByUUID(UUID id) {
-        return userRepository.findByUserId(id).map(mapper::mapTo)
+        return userRepository.findByUserId(id).map(mapper::mapFrom)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
@@ -55,7 +55,7 @@ public class UserService {
         var list = userRepository.findAll();
         if (list != null) {
             return list.stream()
-                    .map(mapper::mapTo)
+                    .map(mapper::mapFrom)
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();

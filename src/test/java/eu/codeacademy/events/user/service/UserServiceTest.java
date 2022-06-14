@@ -47,10 +47,10 @@ class UserServiceTest {
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
-        Mockito.when(userMapper.mapTo(input)).thenReturn(user);
-        Mockito.when(userMapper.mapTo(user)).thenReturn(userDto);
+        Mockito.when(userMapper.mapFrom(input)).thenReturn(user);
+        Mockito.when(userMapper.mapFrom(user)).thenReturn(userDto);
 
-        Mockito.when(userRepository.save(userMapper.mapTo(input))).thenReturn(user);
+        Mockito.when(userRepository.save(userMapper.mapFrom(input))).thenReturn(user);
 
         UserDto actual = userService.add(input);
 
@@ -81,9 +81,9 @@ class UserServiceTest {
                 .build();
 
         Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
-        Mockito.when(userMapper.mapTo(updateUserDto)).thenReturn(user);
+        Mockito.when(userMapper.mapFrom(updateUserDto)).thenReturn(user);
         Mockito.when(userRepository.save(user)).thenReturn(updatedUser);
-        Mockito.when(userMapper.mapTo(updatedUser)).thenReturn(updatedUserDto);
+        Mockito.when(userMapper.mapFrom(updatedUser)).thenReturn(updatedUserDto);
         UserDto actual = userService.update(updateUserDto);
         Assertions.assertThat(actual.getUserId()).isEqualTo(UUID.fromString("00000000-0000-0000-0000-000000000000"));
     }
@@ -113,7 +113,7 @@ class UserServiceTest {
                 userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
         Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
-        Mockito.when(userMapper.mapTo(user)).thenReturn(userDto);
+        Mockito.when(userMapper.mapFrom(user)).thenReturn(userDto);
         UserDto actual = userService.getUserByUUID(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
         Assertions.assertThat(actual.getUserId()).isEqualTo(user.getUserId());
     }
@@ -130,7 +130,7 @@ class UserServiceTest {
                 .build();
 
         Mockito.when(userRepository.findAll()).thenReturn(list);
-        Mockito.when(userMapper.mapTo(user1)).thenReturn(userDto);
+        Mockito.when(userMapper.mapFrom(user1)).thenReturn(userDto);
 
         List<UserDto> actual = userService.getAllUsers();
         Assertions.assertThat(actual.get(0).getUserId()).isEqualTo(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));

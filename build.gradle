@@ -19,15 +19,19 @@ repositories {
 }
 
 ext {
-//    devToolsVersion = '2.6.7'
+    devToolsVersion = '2.6.7'
     postgresVersion = '42.3.4'
+    thymeleafExtrasVersion = '3.0.4.RELEASE'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation "org.springframework.boot:spring-boot-devtools:${devToolsVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.springframework.boot:spring-boot-devtools:${devToolsVersion}"
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafExtrasVersion}"
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
