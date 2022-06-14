@@ -62,7 +62,7 @@ public class EventService {
     }
 
     public EventDto getEventByUUID(UUID id) {
-        return eventRepository.findByEventId(id).map(mapper::mapFrom)
+        return eventRepository.findByEventId(id).map(event -> mapper.mapFrom(event))
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
 
