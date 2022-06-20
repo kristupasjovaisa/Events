@@ -1,4 +1,4 @@
 dependencies {
-    implementation project(":Events-mvc")
+    implementation project(":Events-api")
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }
