@@ -3,7 +3,6 @@ package eu.codeacademy.events.user.mapper;
 import eu.codeacademy.events.user.dto.AddUserDto;
 import eu.codeacademy.events.user.dto.UpdateUserDto;
 import eu.codeacademy.events.user.dto.UserDto;
-import eu.codeacademy.events.user.dto.UserRoleDto;
 import eu.codeacademy.events.user.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -44,17 +43,5 @@ public class UserMapper {
                 password(user.getPassword()).
                 phoneNumber(user.getPhoneNumber()).
                 build();
-    }
-
-    public UserRoleDto mapUserRoleFrom(UserEntity user) {
-        return UserRoleDto.builder()
-                .user(UserDto.builder()
-                        .userId(user.getUserId())
-                        .nickname(user.getNickname())
-                        .city(user.getCity())
-                        .email(user.getEmail())
-                        .password(user.getPassword())
-                        .phoneNumber(user.getPhoneNumber())
-                        .build()).build();
     }
 }
