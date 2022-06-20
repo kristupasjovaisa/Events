@@ -97,7 +97,7 @@ class UserServiceTest {
                 .build();
         Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
         boolean actual = userService.delete(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
-        verify(userRepository, Mockito.times(1)).deleteById(1l);
+        Mockito.verify(userRepository, Mockito.times(1)).deleteById(1l);
         Assertions.assertThat(actual).isEqualTo(true);
     }
 

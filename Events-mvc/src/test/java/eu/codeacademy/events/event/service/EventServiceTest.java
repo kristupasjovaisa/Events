@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.Mockito.verify;
-
 @ExtendWith(MockitoExtension.class)
 class EventServiceTest {
 
@@ -98,7 +96,7 @@ class EventServiceTest {
                 .build();
         Mockito.when(eventRepository.findByEventId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(event));
         boolean actual = eventService.delete(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
-        verify(eventRepository, Mockito.times(1)).deleteById(1l);
+        Mockito.verify(eventRepository, Mockito.times(1)).deleteById(1l);
         Assertions.assertThat(actual).isEqualTo(true);
     }
 

@@ -1,4 +1,4 @@
-package eu.codeacademy.events.index.controller;
+package eu.codeacademy.events.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
