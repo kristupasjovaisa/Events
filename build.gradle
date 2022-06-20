@@ -34,5 +34,6 @@ ext {
     devToolsVersion = '2.7.0'
     postgresVersion = '42.3.6'
     thymeleafExtrasVersion = '3.0.4.RELEASE'
+    srpingfoxVersion = '3.0.0'
 }
 
