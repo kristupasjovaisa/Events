@@ -25,7 +25,7 @@ public class FileController {
     @GetMapping("/api/file/download")
     public ResponseEntity<Resource>  getFileByFileName(@RequestParam String fileName){
       return ResponseEntity.ok()
-              .contentType(MediaType.IMAGE_JPEG)
+              .contentType(fileService.getFileMediaTypeByFileName(fileName))
               .body(fileService.getFile(fileName));
     }
 }

@@ -3,11 +3,13 @@ package eu.codeacademy.events.api.file.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,5 +60,9 @@ public class FileService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public MediaType getFileMediaTypeByFileName(String fileName) {
+        return MediaType.valueOf(URLConnection.guessContentTypeFromName(fileName));
     }
 }
