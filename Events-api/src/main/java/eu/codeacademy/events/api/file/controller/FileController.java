@@ -1,6 +1,7 @@
 package eu.codeacademy.events.api.file.controller;
 
 import eu.codeacademy.events.api.file.service.FileService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
+@Api(tags = "File Controller")
 public class FileController {
 
     private final FileService fileService;
