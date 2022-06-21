@@ -3,7 +3,7 @@ package eu.codeacademy.events.api.file.controller;
 import eu.codeacademy.events.api.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,10 @@ public class FileController {
 
     @GetMapping("/api/file/download")
     public ResponseEntity<Resource>  getFileByFileName(@RequestParam String fileName){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
       return ResponseEntity.ok()
+              .headers(headers)
               .contentType(fileService.getFileMediaTypeByFileName(fileName))
               .body(fileService.getFile(fileName));
     }
