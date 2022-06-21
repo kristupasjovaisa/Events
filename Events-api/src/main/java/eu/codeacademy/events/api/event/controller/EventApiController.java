@@ -27,9 +27,9 @@ public class EventApiController {
             value = "Get all events",
             notes = "Get all events from db, and any other information could be here")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Kai sekmingai grazina eventa"),
-            @ApiResponse(code = 401, message = "Reikalauja prisijungimo gaunant eventu sarasa"),
-            @ApiResponse(code = 403, message = "Neturite reikalingu teisiu gauti eventu sarasa")
+            @ApiResponse(code = 200, message = "Event returned successfully"),
+            @ApiResponse(code = 401, message = "User must be authorized"),
+            @ApiResponse(code = 403, message = "User is not granted to get events")
     })
     public EventsResponse getEvents() {
         return EventsResponse.builder().events(eventService.getAllEvents()).build();
