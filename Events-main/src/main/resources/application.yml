@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /api
 spring:
   mvc:
     pathmatch:
@@ -20,3 +23,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
