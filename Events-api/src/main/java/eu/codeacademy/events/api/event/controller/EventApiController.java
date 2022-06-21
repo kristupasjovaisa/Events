@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/events")
+@RequestMapping("/events")
 @RestController
 @Api(tags = "Event Controller")
 public class EventApiController {

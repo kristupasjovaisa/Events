@@ -19,12 +19,12 @@ public class FileController {
 
     private final FileService fileService;
 
-    @PostMapping("/api/file/upload")
+    @PostMapping("/file/upload")
     public void saveFile(@RequestParam MultipartFile file){
         fileService.saveFile(file);
     }
 
-    @GetMapping("/api/file/download")
+    @GetMapping("/file/download")
     public ResponseEntity<Resource>  getFileByFileName(@RequestParam String fileName){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
