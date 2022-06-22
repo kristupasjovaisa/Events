@@ -54,7 +54,7 @@ There are many-to-many (`UserEntity.events` (all the events where user participe
 
 Unit tests are done for `UserService` and `EventService` using JUnit and Mockito.
 
-# To be done (ongoing work on the dev branch)
+# To be done (ongoing work on the [dev](https://github.com/kristupasjovaisa/Events/tree/dev) branch)
 
 - Spring MVC migration to Spring RESTful web service
 - Spring Profiles
