@@ -7,7 +7,7 @@ Simple Spring MVC application where authorized users are able to view, create, e
 ## Entities
 - `EventEntity` - entity that represents event data to be stored to `PostgreSQL` database.
 - `UserEntity` - entity that represents user data to be stored to `PostgreSQL` database.
-- There are many-to-many (`UserEntity.events` (all the events where user participes) <=> `EventEntity.users`(all the members of the event)) and one-to-many (`UserEntity.createdEvents`(all the created events by the user) <=> `EventEntity.owner` (the owner of the event)) relationships between the entities.
+- There are many-to-many (`UserEntity.events` (all the events where user participes) <=> `EventEntity.users`(all the participants of the event)) and one-to-many (`UserEntity.createdEvents`(all the created events by the user) <=> `EventEntity.owner` (the owner of the event)) relationships between the entities.
 
 ## Repositories
 - `UserRepository` - JPA repository to operate with user entities.
