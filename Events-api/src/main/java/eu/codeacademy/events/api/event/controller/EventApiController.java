@@ -1,5 +1,6 @@
 package eu.codeacademy.events.api.event.controller;
 
+import eu.codeacademy.events.api.event.dto.AddEventDto;
 import eu.codeacademy.events.api.event.dto.EventsResponse;
 import eu.codeacademy.events.api.event.service.EventService;
 import io.swagger.annotations.Api;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +25,6 @@ public class EventApiController {
     public static final String EVENTS_ROOT_PATH = "/events";
     private final EventService eventService;
 
-    @ResponseBody
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ApiOperation(
             value = "Get all events",
@@ -37,7 +38,6 @@ public class EventApiController {
         return EventsResponse.builder().events(eventService.getAllEvents()).build();
     }
 
-    @ResponseBody
     @GetMapping(
             path = UUID_PATH,
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -55,5 +55,10 @@ public class EventApiController {
     @DeleteMapping(path = UUID_PATH)
     public void deleteEventById(@PathVariable("uuid") UUID id){
         eventService.delete(id);
+    }
+
+    @PostMapping
+    public void createEvent(@Valid @RequestBody AddEventDto dto){
+        eventService.add(dto);
     }
 }
