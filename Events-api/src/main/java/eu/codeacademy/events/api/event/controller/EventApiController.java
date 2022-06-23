@@ -1,6 +1,7 @@
 package eu.codeacademy.events.api.event.controller;
 
 import eu.codeacademy.events.api.event.dto.AddEventDto;
+import eu.codeacademy.events.api.event.dto.EventDto;
 import eu.codeacademy.events.api.event.dto.EventsResponse;
 import eu.codeacademy.events.api.event.dto.UpdateEventDto;
 import eu.codeacademy.events.api.event.service.EventService;
@@ -9,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +56,11 @@ public class EventApiController {
     public EventsResponse getEventByUUID(@PathVariable("uuid") UUID id) {
         return EventsResponse.builder()
                 .events(List.of(eventService.getEventByUUID(id))).build();
+    }
+
+    @GetMapping(path = "/page")
+    public Page<EventDto> eventsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return eventService.getEventPaginated(PageRequest.of(page, size));
     }
 
     @DeleteMapping(path = UUID_PATH)

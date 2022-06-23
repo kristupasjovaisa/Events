@@ -27,3 +27,7 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
+  data:
+    web:
+      pageable:
+        default-page-size: 3
