@@ -2,6 +2,7 @@ package eu.codeacademy.events.api.event.controller;
 
 import eu.codeacademy.events.api.event.dto.AddEventDto;
 import eu.codeacademy.events.api.event.dto.EventsResponse;
+import eu.codeacademy.events.api.event.dto.UpdateEventDto;
 import eu.codeacademy.events.api.event.service.EventService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,5 +64,13 @@ public class EventApiController {
     public ResponseEntity<Void> createEvent(@Valid @RequestBody AddEventDto dto) {
         eventService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateEvent(@Valid @RequestBody UpdateEventDto dto) {
+        if (eventService.update(dto) != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

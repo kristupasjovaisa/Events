@@ -18,5 +18,4 @@ public class EventDto {
     private String startEventDateTime;
     private String endEventDateTime;
     private String description;
-    private boolean isEditEnabled;
 }
