@@ -8,10 +8,10 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RequestMapping("/events")
@@ -33,5 +33,20 @@ public class EventApiController {
     })
     public EventsResponse getEvents() {
         return EventsResponse.builder().events(eventService.getAllEvents()).build();
+    }
+
+    @ResponseBody
+    @GetMapping(
+            path = "/{uuid}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ApiOperation(value = "Get one event by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Event returned successfully"),
+            @ApiResponse(code = 401, message = "User must be authorized"),
+            @ApiResponse(code = 403, message = "User is not granted to get event")
+    })
+    public EventsResponse getEventByUUID(@PathVariable("uuid") UUID uuid) {
+        return EventsResponse.builder()
+                .events(List.of(eventService.getEventByUUID(uuid))).build();
     }
 }
