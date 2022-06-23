@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@RequestMapping("/events")
+@RequestMapping(EventApiController.EVENTS_ROOT_PATH)
 @RestController
 @Api(tags = "Event Controller")
 public class EventApiController {
 
+    public static final String UUID_PATH = "/{uuid}";
+    public static final String EVENTS_ROOT_PATH = "/events";
     private final EventService eventService;
 
     @ResponseBody
@@ -37,7 +39,7 @@ public class EventApiController {
 
     @ResponseBody
     @GetMapping(
-            path = "/{uuid}",
+            path = UUID_PATH,
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ApiOperation(value = "Get one event by id")
     @ApiResponses(value = {
@@ -45,8 +47,13 @@ public class EventApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get event")
     })
-    public EventsResponse getEventByUUID(@PathVariable("uuid") UUID uuid) {
+    public EventsResponse getEventByUUID(@PathVariable("uuid") UUID id) {
         return EventsResponse.builder()
-                .events(List.of(eventService.getEventByUUID(uuid))).build();
+                .events(List.of(eventService.getEventByUUID(id))).build();
+    }
+
+    @DeleteMapping(path = UUID_PATH)
+    public void deleteEventById(@PathVariable("uuid") UUID id){
+        eventService.delete(id);
     }
 }
