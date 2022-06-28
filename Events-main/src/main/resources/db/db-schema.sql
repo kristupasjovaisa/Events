@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users_events;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS file;
 
 CREATE TABLE users
 (
@@ -34,5 +35,16 @@ CREATE TABLE events_users
     events_id BIGINT NOT NULL,
     FOREIGN KEY (users_id) REFERENCES users (id),
     FOREIGN KEY (events_id) REFERENCES events (id)
+);
+
+CREATE TABLE file
+(
+    id                BIGSERIAL PRIMARY KEY,
+    file_id           UUID           NOT NULL,
+    file_name         VARCHAR(100)   NOT NULL,
+    file_extension    VARCHAR(15)    NOT NULL,
+    media_type        VARCHAR(10)    NOT NULL,
+    size              BIGINT         NOT NULL,
+    timestamp         TIMESTAMP      DEFAULT current_timestamp
 );
 
