@@ -1,5 +1,6 @@
 package eu.codeacademy.events.api.file.service;
 
+import eu.codeacademy.events.api.file.dto.FileResponse;
 import eu.codeacademy.events.jpa.file.entity.File;
 import eu.codeacademy.events.jpa.file.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class FileService {
     private final Path fileLocation = Paths.get("./files").toAbsolutePath().normalize();
 
     @Transactional
-    public void saveFile(MultipartFile file) {
+    public FileResponse saveFile(MultipartFile file) {
         createDirectory();
         try {
             String[] splitFile = file.getOriginalFilename().split("\\.");
@@ -41,10 +42,14 @@ public class FileService {
                     .build());
             Path filePathWithFileName = fileLocation.resolve(savedFileInDb.getUniqFileName());
             Files.copy(file.getInputStream(), filePathWithFileName, StandardCopyOption.REPLACE_EXISTING);
+            return FileResponse.builder()
+                    .originalFileName(savedFileInDb.getUniqFileName())
+                    .build();
         } catch (IOException e) {
             log.error("Cannot created file", e);
             e.printStackTrace();
         }
+        return null;
     }
 
     private String getUniqFileName(MultipartFile file) {

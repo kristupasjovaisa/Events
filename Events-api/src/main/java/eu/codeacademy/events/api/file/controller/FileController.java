@@ -1,5 +1,6 @@
 package eu.codeacademy.events.api.file.controller;
 
+import eu.codeacademy.events.api.file.dto.FileResponse;
 import eu.codeacademy.events.api.file.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +29,8 @@ public class FileController {
     })
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/file/upload")
-    public void saveFile(@RequestParam MultipartFile file) {
-        fileService.saveFile(file);
+    public FileResponse saveFile(@RequestParam MultipartFile file) {
+       return fileService.saveFile(file);
     }
 
     @ApiOperation(value = "Get image by name", httpMethod = "GET")
