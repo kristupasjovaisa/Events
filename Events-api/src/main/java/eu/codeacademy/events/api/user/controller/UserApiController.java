@@ -36,7 +36,7 @@ public class UserApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get user")
     })
-    public UserResponse getEvents() {
+    public UserResponse getUsers() {
         return UserResponse.builder().users(userService.getAllUsers()).build();
     }
 
