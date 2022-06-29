@@ -1,16 +1,17 @@
 package eu.codeacademy.events.api.user.controller;
 
 import eu.codeacademy.events.api.user.dto.AddUserDto;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,19 @@ public class UserApiController {
 
     public static final String USER_ROOT_PATH = "/register";
     private final UserService userService;
+
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ApiOperation(
+            value = "Get all users",
+            notes = "Get all users from db, and any other information could be here")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "User returned successfully"),
+            @ApiResponse(code = 401, message = "User must be authorized"),
+            @ApiResponse(code = 403, message = "User is not granted to get user")
+    })
+    public UserResponse getEvents() {
+        return UserResponse.builder().users(userService.getAllUsers()).build();
+    }
 
 
     @PostMapping
