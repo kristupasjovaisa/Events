@@ -1,10 +1,15 @@
 package eu.codeacademy.events.api.file.service;
 
+import eu.codeacademy.events.api.file.dto.FileResponse;
+import eu.codeacademy.events.jpa.file.entity.File;
+import eu.codeacademy.events.jpa.file.repository.FileRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,33 +19,38 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FileService {
 
+    private final FileRepository fileRepository;
     private final Path fileLocation = Paths.get("./files").toAbsolutePath().normalize();
 
-    public void saveFile(MultipartFile file) {
+    @Transactional
+    public FileResponse saveFile(MultipartFile file) {
         createDirectory();
-
-        try{
-            Path filePathWithFileName = fileLocation.resolve(getUniqFileName(file));
-            Files.copy(file.getInputStream(),filePathWithFileName, StandardCopyOption.REPLACE_EXISTING);
-        }catch (IOException e){
+        try {
+            String[] splitFile = file.getOriginalFilename().split("\\.");
+            File savedFileInDb = fileRepository.save(File.builder()
+                    .fileName(splitFile[0])
+                    .fileExtension(splitFile[1])
+                    .size(file.getSize())
+                    .mediaType(file.getContentType())
+                    .build());
+            Path filePathWithFileName = fileLocation.resolve(savedFileInDb.getUniqFileName());
+            Files.copy(file.getInputStream(), filePathWithFileName, StandardCopyOption.REPLACE_EXISTING);
+            return FileResponse.builder()
+                    .originalFileName(savedFileInDb.getUniqFileName())
+                    .build();
+        } catch (IOException e) {
             log.error("Cannot created file", e);
             e.printStackTrace();
         }
+        return null;
     }
-
-    private String getUniqFileName(MultipartFile file){
-        String fileName = file.getOriginalFilename();
-        int nanoDate = LocalDateTime.now().getNano();
-        return String.format("%s_%s",nanoDate,fileName);
-    }
-
-    private void createDirectory(){
+    private void createDirectory() {
         try {
             if (!Files.exists(fileLocation)) {
                 Files.createDirectory(fileLocation);

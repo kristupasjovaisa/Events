@@ -1,12 +1,10 @@
 package eu.codeacademy.events.api.user.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Builder
-@Getter
-@Setter
+@Data
 public class AddUserDto {
 
     private String nickname;
