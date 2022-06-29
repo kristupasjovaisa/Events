@@ -1,6 +1,7 @@
 package eu.codeacademy.events.api.user.controller;
 
 import eu.codeacademy.events.api.user.dto.AddUserDto;
+import eu.codeacademy.events.api.user.dto.UpdateUserDto;
 import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -43,5 +44,14 @@ public class UserApiController {
     public ResponseEntity<Void> createUser(@Valid @RequestBody AddUserDto dto) {
         userService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Update user", httpMethod = "PUT")
+    public ResponseEntity<Void> updateUser(@Valid @RequestBody UpdateUserDto dto) {
+        if (userService.update(dto) != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
