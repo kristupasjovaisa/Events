@@ -26,15 +26,15 @@ CREATE TABLE events
     end_event_date_time   TIMESTAMP    NOT NULL,
     description           VARCHAR(350) NOT NULL,
     owner_id              BIGSERIAL,
-    FOREIGN KEY (owner_id) REFERENCES users (id)
+    FOREIGN KEY (owner_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE events_users
 (
     users_id  BIGINT NOT NULL,
     events_id BIGINT NOT NULL,
-    FOREIGN KEY (users_id) REFERENCES users (id),
-    FOREIGN KEY (events_id) REFERENCES events (id)
+    FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (events_id) REFERENCES events (id) ON DELETE CASCADE
 );
 
 CREATE TABLE file

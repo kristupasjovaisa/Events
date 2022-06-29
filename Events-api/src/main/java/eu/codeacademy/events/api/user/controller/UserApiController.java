@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 public class UserApiController {
 
     public static final String USER_ROOT_PATH = "/register";
+    public static final String UUID_PATH = "/{uuid}";
     private final UserService userService;
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -53,5 +55,11 @@ public class UserApiController {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(path = UUID_PATH)
+    @ApiOperation(value = "Delete user", httpMethod = "DELETE")
+    public void deleteUserById(@PathVariable("uuid") UUID id) {
+        userService.delete(id);
     }
 }
