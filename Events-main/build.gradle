@@ -1,4 +1,5 @@
 dependencies {
     implementation project(":Events-api")
+    implementation project(":security:security-jwt")
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }

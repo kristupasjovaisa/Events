@@ -3,4 +3,6 @@ include 'Events-main'
 include 'Events-mvc'
 include 'Events-api'
 include 'Events-jpa'
+include 'security'
+include 'security:security-jwt'
 
