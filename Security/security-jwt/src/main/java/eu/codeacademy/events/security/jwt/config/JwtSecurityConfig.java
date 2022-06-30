@@ -1,5 +1,6 @@
 package eu.codeacademy.events.security.jwt.config;
 
+import eu.codeacademy.events.security.jwt.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,5 +42,10 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and();
+
+        // set filters
+
+        http
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()));
     }
 }
