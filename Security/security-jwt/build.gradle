@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':Events-jpa')
+    implementation project(':Events-api')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}

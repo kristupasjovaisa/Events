@@ -23,7 +23,7 @@ import java.util.UUID;
 @Api(tags = "User Controller")
 public class UserApiController {
 
-    public static final String USER_ROOT_PATH = "/register";
+    public static final String USER_ROOT_PATH = "/user";
     public static final String UUID_PATH = "/{uuid}";
     private final UserService userService;
 

@@ -1,5 +1,6 @@
 package eu.codeacademy.events.jpa.user.entity;
 
+import eu.codeacademy.events.jpa.authority.entity.Authority;
 import eu.codeacademy.events.jpa.event.entity.EventEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +38,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "owner")
     private Set<EventEntity> createdEvents;
+
+    @ManyToMany
+    private Set<Authority> authorities;
 }

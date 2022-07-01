@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<UserEntity,Long> {
-    @Query("SELECT u FROM UserEntity u WHERE u.nickname = ?1")
+    @Query("SELECT u FROM UserEntity u JOIN FETCH u.authorities WHERE u.nickname = :nickname")
     Optional<UserEntity> findUserByNickname(String nickname);
     Optional<UserEntity> findByUserId(UUID id);
 
