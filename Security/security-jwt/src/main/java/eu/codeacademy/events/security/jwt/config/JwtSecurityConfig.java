@@ -1,16 +1,18 @@
 package eu.codeacademy.events.security.jwt.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.codeacademy.events.security.jwt.filter.JwtAuthenticationFilter;
-import org.springframework.context.annotation.Configuration;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
-@Configuration
+@RequiredArgsConstructor
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final ObjectMapper objectMapper;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Disable CSRF
@@ -46,6 +48,6 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         // set filters
 
         http
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(),objectMapper));
     }
 }
