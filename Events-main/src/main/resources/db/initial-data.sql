@@ -1,5 +1,5 @@
 INSERT INTO users(user_id, nickname, city, email, password, phone_number)
-VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'admin', 'Panevezys', 'af@gmail.com', '{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC',
+VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'ADMIN', 'Panevezys', 'af@gmail.com', '{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC',
         '+37066655584'),
        ('e4dbc123-a7c2-4bee-a519-e1b9ba991342', 'guest', 'Kaunas', 'gf@gmail.com','{bcrypt}$2a$10$o2xZA.yF/bZbADZSplayteNUH7DQOf35CBh6ZbmjO0IiuHn8fmUzO',
         '+37066655884'),

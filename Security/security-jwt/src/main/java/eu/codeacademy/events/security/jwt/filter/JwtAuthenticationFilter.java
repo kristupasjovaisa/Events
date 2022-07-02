@@ -2,6 +2,9 @@ package eu.codeacademy.events.security.jwt.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.codeacademy.events.security.jwt.dto.LoginRequest;
+import eu.codeacademy.events.security.jwt.dto.UserRoleDto;
+import eu.codeacademy.events.security.jwt.service.JwtProvider;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,10 +21,13 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final ObjectMapper objectMapper;
+    private final JwtProvider jwtProvider;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper, JwtProvider jwtProvider) {
         super(authenticationManager);
         this.objectMapper = objectMapper;
+        this.jwtProvider = jwtProvider;
+
     }
 
     @Override
@@ -41,6 +47,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        //
+        response.addHeader(HttpHeaders.AUTHORIZATION, jwtProvider.getToken((UserRoleDto) authResult.getPrincipal()));
     }
 }
