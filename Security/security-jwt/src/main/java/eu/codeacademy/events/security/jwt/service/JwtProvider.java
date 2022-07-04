@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +32,10 @@ public class JwtProvider {
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toSet()))
                 .signWith(Keys.hmacShaKeyFor(secretKey), SignatureAlgorithm.HS512)
                 .compact();
+    }
+
+    public Authentication parseToken(String replace) {
+        return null;
+        //new UsernamePasswordAuthenticationToken(nickname,null,roles);
     }
 }
