@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -84,6 +85,7 @@ public class EventApiController {
 
     @PostMapping
     @ApiOperation(value = "Create event", httpMethod = "POST")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> createEvent(@Valid @RequestBody AddEventDto dto) {
         eventService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -91,6 +93,7 @@ public class EventApiController {
 
     @PutMapping
     @ApiOperation(value = "Update event", httpMethod = "PUT")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> updateEvent(@Valid @RequestBody UpdateEventDto dto) {
         if (eventService.update(dto) != null) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
