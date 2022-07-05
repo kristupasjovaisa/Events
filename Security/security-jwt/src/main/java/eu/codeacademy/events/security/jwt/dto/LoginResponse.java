@@ -1,21 +1,11 @@
 package eu.codeacademy.events.security.jwt.dto;
 
-import lombok.Getter;
-import org.springframework.security.core.GrantedAuthority;
+import lombok.Value;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-@Getter
+@Value(staticConstructor = "of")
 public class LoginResponse {
 
-    private final String username;
-
-    private final Set<String> roles;
-
-    public LoginResponse(UserRoleDto userRoleDto) {
-        this.username = userRoleDto.getUsername();
-        this.roles = userRoleDto.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toSet());
-    }
+    String nickname;
+    String jwtToken;
+    Long jwtTokenExpiresIn;
 }
