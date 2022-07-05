@@ -5,6 +5,7 @@ import eu.codeacademy.events.api.event.dto.EventDto;
 import eu.codeacademy.events.api.event.dto.EventsResponse;
 import eu.codeacademy.events.api.event.dto.UpdateEventDto;
 import eu.codeacademy.events.api.event.service.EventService;
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,7 @@ import java.util.UUID;
 @RequestMapping(EventApiController.EVENTS_ROOT_PATH)
 @RestController
 @Api(tags = "Event Controller")
+@OpenApi
 public class EventApiController {
 
     public static final String UUID_PATH = "/{uuid}";

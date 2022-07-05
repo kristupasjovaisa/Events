@@ -1,5 +1,6 @@
 package eu.codeacademy.events.api.config;
 
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,11 +15,11 @@ import java.util.Collections;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(getInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("eu.codeacademy.events.api"))
+                .apis(RequestHandlerSelectors.withClassAnnotation(OpenApi.class))
                 .build();
     }
 

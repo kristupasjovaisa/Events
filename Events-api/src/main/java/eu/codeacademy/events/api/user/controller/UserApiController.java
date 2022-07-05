@@ -4,6 +4,7 @@ import eu.codeacademy.events.api.user.dto.AddUserDto;
 import eu.codeacademy.events.api.user.dto.UpdateUserDto;
 import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.service.UserService;
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping(UserApiController.USER_ROOT_PATH)
 @Api(tags = "User Controller")
+@OpenApi
 public class UserApiController {
 
     public static final String USER_ROOT_PATH = "/user";

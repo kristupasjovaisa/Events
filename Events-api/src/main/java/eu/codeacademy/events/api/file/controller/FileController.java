@@ -2,6 +2,7 @@ package eu.codeacademy.events.api.file.controller;
 
 import eu.codeacademy.events.api.file.dto.FileResponse;
 import eu.codeacademy.events.api.file.service.FileService;
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "File Management")
+@OpenApi
 public class FileController {
 
     private final FileService fileService;
