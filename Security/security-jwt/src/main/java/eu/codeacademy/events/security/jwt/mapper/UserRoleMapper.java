@@ -1,9 +1,9 @@
 package eu.codeacademy.events.security.jwt.mapper;
 
 import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.UserRoleDto;
 import eu.codeacademy.events.jpa.authority.entity.Authority;
 import eu.codeacademy.events.jpa.user.entity.UserEntity;
-import eu.codeacademy.events.security.jwt.dto.UserRoleDto;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 

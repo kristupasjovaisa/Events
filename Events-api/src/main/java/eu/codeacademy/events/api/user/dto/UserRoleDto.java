@@ -1,7 +1,7 @@
-package eu.codeacademy.events.security.jwt.dto;
+package eu.codeacademy.events.api.user.dto;
 
-import eu.codeacademy.events.api.user.dto.UserDto;
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
+@Getter
 public class UserRoleDto implements UserDetails {
 
     private UserDto user;
@@ -19,17 +20,17 @@ public class UserRoleDto implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles;
+        return roles;
     }
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.user.getNickname();
+        return user.getNickname();
     }
 
     @Override
@@ -52,3 +53,4 @@ public class UserRoleDto implements UserDetails {
         return true;
     }
 }
+

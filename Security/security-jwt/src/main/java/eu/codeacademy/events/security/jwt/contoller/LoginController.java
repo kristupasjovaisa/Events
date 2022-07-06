@@ -1,9 +1,9 @@
 package eu.codeacademy.events.security.jwt.contoller;
 
+import eu.codeacademy.events.api.user.dto.UserRoleDto;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import eu.codeacademy.events.security.jwt.dto.LoginRequest;
 import eu.codeacademy.events.security.jwt.dto.LoginResponse;
-import eu.codeacademy.events.security.jwt.dto.UserRoleDto;
 import eu.codeacademy.events.security.jwt.service.JwtProvider;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
