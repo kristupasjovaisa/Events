@@ -1,6 +1,5 @@
 package eu.codeacademy.events.security.jwt.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.codeacademy.events.security.jwt.filter.JwtAuthorizationFilter;
 import eu.codeacademy.events.security.jwt.service.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(proxyTargetClass = true,securedEnabled = true,jsr250Enabled = true)
 @Configuration
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final ObjectMapper objectMapper;
+    
     private final UserDetailsService userDetailsService;
     private final JwtProvider jwtProvider;
     @Bean
