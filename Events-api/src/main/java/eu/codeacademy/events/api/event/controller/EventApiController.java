@@ -81,6 +81,7 @@ public class EventApiController {
 
     @DeleteMapping(path = UUID_PATH)
     @ApiOperation(value = "Delete event", httpMethod = "DELETE")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteEventById(@PathVariable("uuid") UUID id) {
         eventService.delete(id);
     }
