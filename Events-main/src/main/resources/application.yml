@@ -31,3 +31,8 @@ spring:
     web:
       pageable:
         default-page-size: 3
+
+security:
+  jwt:
+    # validity time in minutes
+    validity-time: 30

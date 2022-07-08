@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users_events;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS file;
+DROP TABLE IF EXISTS authority;
 
 CREATE TABLE users
 (
@@ -12,6 +13,21 @@ CREATE TABLE users
     email        VARCHAR(50)  NOT NULL,
     password     VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20)  NOT NULL
+);
+
+CREATE TABLE authority
+(
+    id       BIGSERIAL PRIMARY KEY,
+    nickname VARCHAR(100) NOT NULL,
+    CONSTRAINT authority_key UNIQUE (nickname)
+);
+
+CREATE TABLE users_authorities
+(
+    user_entity_id BIGINT NOT NULL,
+    authorities_id BIGINT NOT NULL,
+    FOREIGN KEY (user_entity_id) REFERENCES users (id),
+    FOREIGN KEY (authorities_id) REFERENCES authority (id)
 );
 
 CREATE TABLE events
@@ -39,12 +55,12 @@ CREATE TABLE events_users
 
 CREATE TABLE file
 (
-    id                BIGSERIAL PRIMARY KEY,
-    file_id           UUID           NOT NULL,
-    file_name         VARCHAR(100)   NOT NULL,
-    file_extension    VARCHAR(15)    NOT NULL,
-    media_type        VARCHAR(10)    NOT NULL,
-    size              BIGINT         NOT NULL,
-    timestamp         TIMESTAMP      DEFAULT current_timestamp
+    id             BIGSERIAL PRIMARY KEY,
+    file_id        UUID         NOT NULL,
+    file_name      VARCHAR(100) NOT NULL,
+    file_extension VARCHAR(15)  NOT NULL,
+    media_type     VARCHAR(10)  NOT NULL,
+    size           BIGINT       NOT NULL,
+    timestamp      TIMESTAMP DEFAULT current_timestamp
 );
 

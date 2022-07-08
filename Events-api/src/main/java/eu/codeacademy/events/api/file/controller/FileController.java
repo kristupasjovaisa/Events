@@ -2,6 +2,7 @@ package eu.codeacademy.events.api.file.controller;
 
 import eu.codeacademy.events.api.file.dto.FileResponse;
 import eu.codeacademy.events.api.file.service.FileService;
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,12 +12,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "File Management")
+@OpenApi
 public class FileController {
 
     private final FileService fileService;
@@ -29,6 +32,7 @@ public class FileController {
     })
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/file/upload")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public FileResponse saveFile(@RequestParam MultipartFile file) {
        return fileService.saveFile(file);
     }

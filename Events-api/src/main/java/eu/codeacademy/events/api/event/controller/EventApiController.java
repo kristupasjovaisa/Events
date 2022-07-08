@@ -5,6 +5,7 @@ import eu.codeacademy.events.api.event.dto.EventDto;
 import eu.codeacademy.events.api.event.dto.EventsResponse;
 import eu.codeacademy.events.api.event.dto.UpdateEventDto;
 import eu.codeacademy.events.api.event.service.EventService;
+import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import java.util.UUID;
 @RequestMapping(EventApiController.EVENTS_ROOT_PATH)
 @RestController
 @Api(tags = "Event Controller")
+@OpenApi
 public class EventApiController {
 
     public static final String UUID_PATH = "/{uuid}";
@@ -78,12 +81,14 @@ public class EventApiController {
 
     @DeleteMapping(path = UUID_PATH)
     @ApiOperation(value = "Delete event", httpMethod = "DELETE")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteEventById(@PathVariable("uuid") UUID id) {
         eventService.delete(id);
     }
 
     @PostMapping
     @ApiOperation(value = "Create event", httpMethod = "POST")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> createEvent(@Valid @RequestBody AddEventDto dto) {
         eventService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -91,6 +96,7 @@ public class EventApiController {
 
     @PutMapping
     @ApiOperation(value = "Update event", httpMethod = "PUT")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> updateEvent(@Valid @RequestBody UpdateEventDto dto) {
         if (eventService.update(dto) != null) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
