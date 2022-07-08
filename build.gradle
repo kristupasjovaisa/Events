@@ -33,7 +33,7 @@ allprojects{
 ext {
     devToolsVersion = '2.7.0'
     postgresVersion = '42.3.6'
-    thymeleafExtrasVersion = '3.0.4.RELEASE'
+    h2Version = '2.1.212'
     srpingfoxVersion = '3.0.0'
 }
 
