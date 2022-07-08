@@ -2,6 +2,8 @@ server:
   servlet:
     context-path: /api
 spring:
+  profiles:
+    active: production
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -32,6 +34,49 @@ spring:
       pageable:
         default-page-size: 3
 
+security:
+  jwt:
+    # validity time in minutes
+    validity-time: 30
+
+---
+server:
+  servlet:
+    context-path: /api
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:h2:mem:default
+    driver-class-name: org.h2.Driver
+    username: events
+    password: events
+  sql:
+    init:
+      schema-locations: classpath:db/h2/db-schema.sql
+      data-locations: classpath:db/initial-data.sql
+    h2:
+      console:
+        enable: true
+      path: /h2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  data:
+    web:
+      pageable:
+        default-page-size: 3
 security:
   jwt:
     # validity time in minutes
