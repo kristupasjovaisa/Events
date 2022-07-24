@@ -23,6 +23,7 @@ import java.util.UUID;
 @RequestMapping(UserApiController.USER_ROOT_PATH)
 @Api(tags = "User Controller")
 @OpenApi
+@CrossOrigin
 public class UserApiController {
 
     public static final String USER_ROOT_PATH = "/user";

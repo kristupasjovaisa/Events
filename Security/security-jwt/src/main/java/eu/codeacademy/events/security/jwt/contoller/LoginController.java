@@ -13,10 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -28,6 +25,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @Api(tags = "Login Controller")
 @OpenApi
 @RequiredArgsConstructor
+@CrossOrigin
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;

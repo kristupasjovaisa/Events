@@ -25,13 +25,14 @@ import java.util.UUID;
 @RestController
 @Api(tags = "Event Controller")
 @OpenApi
+@CrossOrigin
 public class EventApiController {
 
     public static final String UUID_PATH = "/{uuid}";
     public static final String EVENTS_ROOT_PATH = "/events";
     private final EventService eventService;
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(
             value = "Get all events",
             notes = "Get all events from db, and any other information could be here")
@@ -46,7 +47,7 @@ public class EventApiController {
 
     @GetMapping(
             path = UUID_PATH,
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Get one event by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Event returned successfully"),
