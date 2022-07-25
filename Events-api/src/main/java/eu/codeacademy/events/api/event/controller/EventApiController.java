@@ -17,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -54,9 +53,8 @@ public class EventApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get event")
     })
-    public EventsResponse getEventByUUID(@PathVariable("uuid") UUID id) {
-        return EventsResponse.builder()
-                .events(List.of(eventService.getEventByUUID(id))).build();
+    public EventDto getEventByUUID(@PathVariable("uuid") UUID id) {
+        return eventService.getEventByUUID(id);
     }
 
     @GetMapping(path = "/page")
