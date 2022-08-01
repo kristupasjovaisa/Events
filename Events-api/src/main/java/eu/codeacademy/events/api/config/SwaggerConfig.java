@@ -27,11 +27,11 @@ public class SwaggerConfig {
                 .securityContexts(List.of(jwtAuthContext()));
     }
 
-    private SecurityContext jwtAuthContext() {
-        return SecurityContext.builder()
-                .securityReferences(jwtAuthReference())
-                .build();
-    }
+//    private SecurityContext jwtAuthContext() {
+//        return SecurityContext.builder()
+//                .securityReferences(jwtAuthReference())
+//                .build();
+//    }
 
     private List<SecurityReference> jwtAuthReference() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
