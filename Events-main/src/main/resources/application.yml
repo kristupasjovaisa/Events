@@ -80,4 +80,4 @@ spring:
 security:
   jwt:
     # validity time in minutes
-    validity-time: 30
+    validity-time: 30000

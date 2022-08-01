@@ -23,13 +23,14 @@ import java.util.UUID;
 @RequestMapping(UserApiController.USER_ROOT_PATH)
 @Api(tags = "User Controller")
 @OpenApi
+@CrossOrigin
 public class UserApiController {
 
     public static final String USER_ROOT_PATH = "/user";
     public static final String UUID_PATH = "/{uuid}";
     private final UserService userService;
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(
             value = "Get all users",
             notes = "Get all users from db, and any other information could be here")
