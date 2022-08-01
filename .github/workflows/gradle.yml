@@ -13,12 +13,11 @@ jobs:
       with:
         distribution: temurin
         java-version: 11
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
         
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-      
-    - name: Change wrapper permissions
-      run: chmod +x ./gradlew
-    
+          
     - name: Execute Gradle build
       run: ./gradlew build
