@@ -15,7 +15,7 @@ jobs:
         with:
           channel: 'stable'
       # Get flutter packages
-      - run: flutter pub get
+      - run: flutter packages get
       # Build :D
       - run: flutter build aot
           
