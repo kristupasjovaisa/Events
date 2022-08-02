@@ -19,6 +19,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Execute all test cases
         run: ./gradlew cleanTest test
 
