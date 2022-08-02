@@ -1,6 +1,5 @@
 rootProject.name = 'Events'
 include 'Events-main'
-include 'Events-mvc'
 include 'Events-api'
 include 'Events-jpa'
 include 'security'
