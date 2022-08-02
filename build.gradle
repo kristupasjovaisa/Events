@@ -37,3 +37,7 @@ ext {
     srpingfoxVersion = '3.0.0'
 }
 
+test {
+    useJUnitPlatform()
+}
+
