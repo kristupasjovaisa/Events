@@ -5,7 +5,7 @@ on:
     branches: [dev]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,4 +17,4 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        run: ./gradlew build --scan
+        run: ./gradlew testDebugUnitTest
