@@ -35,8 +35,8 @@ public class EventService {
         if (owner.isPresent()) {
             event.setOwner(owner.get());
         }
-        return null;
-//        return mapper.mapFrom(eventRepository.save(event));
+//        return null;
+        return mapper.mapFrom(eventRepository.save(event));
     }
 
     @Transactional
