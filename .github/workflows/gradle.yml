@@ -35,6 +35,4 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          arguments: test
+        run: ./gradlew test
