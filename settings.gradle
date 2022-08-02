@@ -1,8 +1,8 @@
 rootProject.name = 'Events'
-include 'Events-main'
+//include 'Events-main'
 include 'Events-api'
-include 'Events-jpa'
-include 'security'
-include 'security:security-jwt'
-include 'Events-commons'
+//include 'Events-jpa'
+//include 'security'
+//include 'security:security-jwt'
+//include 'Events-commons'
 
