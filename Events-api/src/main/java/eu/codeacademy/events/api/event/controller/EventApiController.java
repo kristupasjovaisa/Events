@@ -5,10 +5,11 @@ import eu.codeacademy.events.api.event.dto.EventResponse;
 import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.service.EventService;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,27 +56,6 @@ public class EventApiController {
     })
     public EventResponse getEventByUUID(@PathVariable("uuid") UUID id) {
         return eventService.getEventByUUID(id);
-    }
-
-    @GetMapping(path = "/page")
-    @ApiOperation(value = "Get all event by page and size")
-    public Page<EventResponse> eventsPaginated(
-            @ApiParam(
-                    name = "page",
-                    type = "int",
-                    value = "Number of page",
-                    example = "1",
-                    required = true)
-            @RequestParam("page") int page,
-
-            @ApiParam(
-                    name = "size",
-                    type = "int",
-                    value = "Content size in page",
-                    example = "1",
-                    required = true)
-            @RequestParam("size") int size) {
-        return eventService.getEventPaginated(PageRequest.of(page, size));
     }
 
     @DeleteMapping(path = UUID_PATH)

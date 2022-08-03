@@ -10,8 +10,6 @@ import eu.codeacademy.events.jpa.event.entity.Event;
 import eu.codeacademy.events.jpa.event.repository.EventRepository;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,10 +74,5 @@ public class EventService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
-    }
-
-    public Page<EventResponse> getEventPaginated(Pageable pageable) {
-        return eventRepository.findAll(pageable)
-                .map(eventEntity -> mapper.mapFrom(eventEntity));
     }
 }
