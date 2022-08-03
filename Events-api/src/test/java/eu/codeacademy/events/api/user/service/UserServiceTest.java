@@ -1,8 +1,8 @@
 package eu.codeacademy.events.api.user.service;
 
-import eu.codeacademy.events.api.user.dto.AddUserDto;
-import eu.codeacademy.events.api.user.dto.UpdateUserDto;
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.AddUserRequest;
+import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.mapper.UserMapper;
 import eu.codeacademy.events.jpa.user.entity.UserEntity;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
@@ -39,8 +39,8 @@ class UserServiceTest {
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
-        AddUserDto input = AddUserDto.builder().build();
-        UserDto userDto = UserDto
+        AddUserRequest input = AddUserRequest.builder().build();
+        UserResponse userDto = UserResponse
                 .builder()
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
@@ -50,7 +50,7 @@ class UserServiceTest {
 
         Mockito.when(userRepository.save(userMapper.mapFrom(input))).thenReturn(user);
 
-        UserDto actual = userService.add(input);
+        UserResponse actual = userService.add(input);
 
         Assertions.assertThat(actual.getUserId()).isEqualTo(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
     }
@@ -69,11 +69,11 @@ class UserServiceTest {
                 .userId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
                 .build();
 
-        UpdateUserDto updateUserDto = UpdateUserDto.builder()
+        UpdateUserRequest updateUserDto = UpdateUserRequest.builder()
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
-        UserDto updatedUserDto = UserDto
+        UserResponse updatedUserDto = UserResponse
                 .builder()
                 .userId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
                 .build();
@@ -82,7 +82,7 @@ class UserServiceTest {
         Mockito.when(userMapper.mapFrom(updateUserDto)).thenReturn(user);
         Mockito.when(userRepository.save(user)).thenReturn(updatedUser);
         Mockito.when(userMapper.mapFrom(updatedUser)).thenReturn(updatedUserDto);
-        UserDto actual = userService.update(updateUserDto);
+        UserResponse actual = userService.update(updateUserDto);
         Assertions.assertThat(actual.getUserId()).isEqualTo(UUID.fromString("00000000-0000-0000-0000-000000000000"));
     }
 
@@ -107,12 +107,12 @@ class UserServiceTest {
                 userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
-        UserDto userDto = UserDto.builder().
+        UserResponse userDto = UserResponse.builder().
                 userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
         Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
         Mockito.when(userMapper.mapFrom(user)).thenReturn(userDto);
-        UserDto actual = userService.getUserByUUID(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
+        UserResponse actual = userService.getUserByUUID(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
         Assertions.assertThat(actual.getUserId()).isEqualTo(user.getUserId());
     }
 
@@ -124,13 +124,13 @@ class UserServiceTest {
                 build();
         list.add(user1);
 
-        UserDto userDto = UserDto.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
+        UserResponse userDto = UserResponse.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
         Mockito.when(userRepository.findAll()).thenReturn(list);
         Mockito.when(userMapper.mapFrom(user1)).thenReturn(userDto);
 
-        List<UserDto> actual = userService.getAllUsers();
+        List<UserResponse> actual = userService.getAllUsers();
         Assertions.assertThat(actual.get(0).getUserId()).isEqualTo(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"));
         Assertions.assertThat(actual.size()).isEqualTo(1);
     }

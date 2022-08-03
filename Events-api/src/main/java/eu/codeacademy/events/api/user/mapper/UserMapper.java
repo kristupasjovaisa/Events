@@ -1,8 +1,8 @@
 package eu.codeacademy.events.api.user.mapper;
 
-import eu.codeacademy.events.api.user.dto.AddUserDto;
-import eu.codeacademy.events.api.user.dto.UpdateUserDto;
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.AddUserRequest;
+import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.jpa.authority.entity.Authority;
 import eu.codeacademy.events.jpa.authority.repository.AuthorityRepository;
 import eu.codeacademy.events.jpa.user.entity.UserEntity;
@@ -21,7 +21,7 @@ public class UserMapper {
     final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     private final AuthorityRepository authorityRepository;
 
-    public UserEntity mapFrom(AddUserDto dto) {
+    public UserEntity mapFrom(AddUserRequest dto) {
         Set<Authority> authorities = authorityRepository.findAll()
                 .stream().filter(authority -> authority.getName().equals("USER"))
                 .collect(Collectors.toSet());
@@ -38,7 +38,7 @@ public class UserMapper {
                 build();
     }
 
-    public UserEntity mapFrom(UpdateUserDto dto) {
+    public UserEntity mapFrom(UpdateUserRequest dto) {
         return UserEntity.builder().
                 userId(dto.getUserId()).
                 name(dto.getName()).
@@ -50,8 +50,8 @@ public class UserMapper {
                 build();
     }
 
-    public UserDto mapFrom(UserEntity user) {
-        return UserDto.builder().
+    public UserResponse mapFrom(UserEntity user) {
+        return UserResponse.builder().
                 userId(user.getUserId()).
                 name(user.getName()).
                 lastName(user.getLastName()).

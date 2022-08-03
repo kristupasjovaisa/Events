@@ -1,8 +1,8 @@
 package eu.codeacademy.events.api.event.service;
 
-import eu.codeacademy.events.api.event.dto.AddEventDto;
-import eu.codeacademy.events.api.event.dto.EventDto;
-import eu.codeacademy.events.api.event.dto.UpdateEventDto;
+import eu.codeacademy.events.api.event.dto.AddEventRequest;
+import eu.codeacademy.events.api.event.dto.EventResponse;
+import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.exception.EventNotFoundException;
 import eu.codeacademy.events.api.event.mapper.EventMapper;
 import eu.codeacademy.events.api.utils.SecurityUtils;
@@ -29,7 +29,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final EventMapper mapper;
 
-    public EventDto add(AddEventDto dto) {
+    public EventResponse add(AddEventRequest dto) {
         var event = mapper.mapFrom(dto);
         var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
         if (owner.isPresent()) {
@@ -39,7 +39,7 @@ public class EventService {
     }
 
     @Transactional
-    public EventDto update(UpdateEventDto dto) {
+    public EventResponse update(UpdateEventRequest dto) {
         Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
             var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
@@ -63,12 +63,12 @@ public class EventService {
         return false;
     }
 
-    public EventDto getEventByUUID(UUID id) {
+    public EventResponse getEventByUUID(UUID id) {
         return eventRepository.findByEventId(id).map(event -> mapper.mapFrom(event))
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
 
-    public List<EventDto> getAllEvents() {
+    public List<EventResponse> getAllEvents() {
         var list = eventRepository.findAll();
         if (list != null) {
             return list.stream()
@@ -78,7 +78,7 @@ public class EventService {
         return Collections.emptyList();
     }
 
-    public Page<EventDto> getEventPaginated(Pageable pageable) {
+    public Page<EventResponse> getEventPaginated(Pageable pageable) {
         return eventRepository.findAll(pageable)
                 .map(eventEntity -> mapper.mapFrom(eventEntity));
     }

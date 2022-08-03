@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
-public class UpdateUserDto {
+public class UpdateUserRequest {
 
     private UUID userId;
     private String name;

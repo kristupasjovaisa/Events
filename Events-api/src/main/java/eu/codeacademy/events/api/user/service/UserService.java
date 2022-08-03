@@ -1,8 +1,8 @@
 package eu.codeacademy.events.api.user.service;
 
-import eu.codeacademy.events.api.user.dto.AddUserDto;
-import eu.codeacademy.events.api.user.dto.UpdateUserDto;
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.AddUserRequest;
+import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.exception.UserNotFoundException;
 import eu.codeacademy.events.api.user.mapper.UserMapper;
 import eu.codeacademy.events.jpa.user.entity.UserEntity;
@@ -23,12 +23,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper mapper;
 
-    public UserDto add(AddUserDto dto) {
+    public UserResponse add(AddUserRequest dto) {
         return mapper.mapFrom(userRepository.save(mapper.mapFrom(dto)));
     }
 
     @Transactional
-    public UserDto update(UpdateUserDto dto) {
+    public UserResponse update(UpdateUserRequest dto) {
         Optional<UserEntity> userOptional = userRepository.findByUserId(dto.getUserId());
         if (userOptional.isPresent()) {
             return mapper.mapFrom(userRepository.save(mapper.mapFrom(dto)));
@@ -46,12 +46,12 @@ public class UserService {
         return false;
     }
 
-    public UserDto getUserByUUID(UUID id) {
+    public UserResponse getUserByUUID(UUID id) {
         return userRepository.findByUserId(id).map(mapper::mapFrom)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public List<UserDto> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         var list = userRepository.findAll();
         if (list != null) {
             return list.stream()

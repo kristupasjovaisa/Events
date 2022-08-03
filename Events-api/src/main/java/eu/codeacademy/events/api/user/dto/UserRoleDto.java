@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 public class UserRoleDto implements UserDetails {
 
-    private UserDto user;
+    private UserResponse user;
 
     @Builder.Default
     private Set<? extends GrantedAuthority> roles = new HashSet<>();

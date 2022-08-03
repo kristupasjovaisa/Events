@@ -1,15 +1,19 @@
 package eu.codeacademy.events.api.user.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.UUID;
 
 @Builder
 @Getter
 public class UserResponse {
 
-    @ApiModelProperty(notes = "Users list", required = true, allowEmptyValue = false)
-    private List<UserDto> users;
+    private UUID userId;
+    private String name;
+    private String lastName;
+    private String city;
+    private String email;
+    private String password;
+    private String phoneNumber;
 }

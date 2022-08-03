@@ -1,6 +1,6 @@
 package eu.codeacademy.events.api.utils;
 
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.dto.UserRoleDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -11,7 +11,7 @@ public final class SecurityUtils {
     private SecurityUtils() {
     }
 
-    public static UserDto getUser() {
+    public static UserResponse getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         if (authentication != null && authentication.getPrincipal() != null) {

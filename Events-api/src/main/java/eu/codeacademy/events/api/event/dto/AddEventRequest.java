@@ -4,13 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @Builder
-public class EventDto {
+public class AddEventRequest {
 
-    private UUID eventId;
     private String name;
     private String location;
     private String category;

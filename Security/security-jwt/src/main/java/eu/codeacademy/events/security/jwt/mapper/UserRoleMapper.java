@@ -1,6 +1,6 @@
 package eu.codeacademy.events.security.jwt.mapper;
 
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.dto.UserRoleDto;
 import eu.codeacademy.events.jpa.authority.entity.Authority;
 import eu.codeacademy.events.jpa.user.entity.UserEntity;
@@ -15,7 +15,7 @@ public class UserRoleMapper {
 
     public UserRoleDto mapUserRoleFrom(UserEntity user) {
         return UserRoleDto.builder()
-                .user(UserDto.builder()
+                .user(UserResponse.builder()
                         .userId(user.getUserId())
                         .name(user.getName())
                         .city(user.getCity())

@@ -11,5 +11,5 @@ import java.util.List;
 public class EventsResponse {
 
     @ApiModelProperty(notes = "Events list", required = true, allowEmptyValue = false)
-    private List<EventDto> events;
+    private List<EventResponse> events;
 }

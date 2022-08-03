@@ -1,8 +1,8 @@
 package eu.codeacademy.events.api.event.mapper;
 
-import eu.codeacademy.events.api.event.dto.AddEventDto;
-import eu.codeacademy.events.api.event.dto.EventDto;
-import eu.codeacademy.events.api.event.dto.UpdateEventDto;
+import eu.codeacademy.events.api.event.dto.AddEventRequest;
+import eu.codeacademy.events.api.event.dto.EventResponse;
+import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.jpa.event.entity.EventEntity;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Component
 public class EventMapper {
 
-    public EventEntity mapFrom(AddEventDto dto) {
+    public EventEntity mapFrom(AddEventRequest dto) {
         return EventEntity.builder().
                 eventId(UUID.randomUUID()).
                 name(dto.getName()).
@@ -25,7 +25,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventEntity mapFrom(UpdateEventDto dto, Long id) {
+    public EventEntity mapFrom(UpdateEventRequest dto, Long id) {
         return EventEntity.builder().
                 id(id).
                 eventId(dto.getEventId()).
@@ -39,8 +39,8 @@ public class EventMapper {
                 .build();
     }
 
-    public EventDto mapFrom(EventEntity event) {
-        return EventDto.builder().
+    public EventResponse mapFrom(EventEntity event) {
+        return EventResponse.builder().
                 eventId(event.getEventId()).
                 name(event.getName()).
                 location(event.getLocation()).
