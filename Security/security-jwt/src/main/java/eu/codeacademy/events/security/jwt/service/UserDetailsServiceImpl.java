@@ -16,9 +16,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRoleMapper mapper;
 
     @Override
-    public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
-        return userRepository.findUserByNickname(nickname)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findUserByEmail(username)
                 .map(user -> mapper.mapUserRoleFrom(user))
-                .orElseThrow(() -> new UsernameNotFoundException("'" + nickname + "' not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("'" + username + "' not found!"));
     }
 }

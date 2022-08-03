@@ -23,7 +23,9 @@ public class UserEntity {
     private Long id;
     private UUID userId;
     @Column(length = 20)
-    private String nickname;
+    private String name;
+    @Column(length = 20)
+    private String lastName;
     @Column(length = 50)
     private String city;
     @Column(length =50)

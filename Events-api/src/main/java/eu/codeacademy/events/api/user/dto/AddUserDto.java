@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 public class AddUserDto {
 
-    private String nickname;
+    private String name;
+    private String lastName;
     private String city;
     private String email;
     private String password;

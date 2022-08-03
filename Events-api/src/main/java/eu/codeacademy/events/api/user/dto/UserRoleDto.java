@@ -30,7 +30,7 @@ public class UserRoleDto implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getNickname();
+        return user.getEmail();
     }
 
     @Override
@@ -51,6 +51,10 @@ public class UserRoleDto implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getUserName() {
+        return user.getName();
     }
 }
 

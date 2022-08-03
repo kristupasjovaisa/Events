@@ -23,12 +23,13 @@ public class UserMapper {
 
     public UserEntity mapFrom(AddUserDto dto) {
         Set<Authority> authorities = authorityRepository.findAll()
-                .stream().filter(authority -> authority.getNickname().equals("USER"))
+                .stream().filter(authority -> authority.getName().equals("USER"))
                 .collect(Collectors.toSet());
 
         return UserEntity.builder().
                 userId(UUID.randomUUID()).
-                nickname(dto.getNickname()).
+                name(dto.getName()).
+                lastName(dto.getLastName()).
                 city(dto.getCity()).
                 email(dto.getEmail()).
                 password(passwordEncoder.encode(dto.getPassword())).
@@ -40,7 +41,8 @@ public class UserMapper {
     public UserEntity mapFrom(UpdateUserDto dto) {
         return UserEntity.builder().
                 userId(dto.getUserId()).
-                nickname(dto.getNickname()).
+                name(dto.getName()).
+                lastName(dto.getLastName()).
                 city(dto.getCity()).
                 email(dto.getEmail()).
                 password(dto.getPassword()).
@@ -51,7 +53,8 @@ public class UserMapper {
     public UserDto mapFrom(UserEntity user) {
         return UserDto.builder().
                 userId(user.getUserId()).
-                nickname(user.getNickname()).
+                name(user.getName()).
+                lastName(user.getLastName()).
                 city(user.getCity()).
                 email(user.getEmail()).
                 password(user.getPassword()).

@@ -8,7 +8,8 @@ CREATE TABLE users
 (
     id           BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id      UUID         NOT NULL,
-    nickname     VARCHAR(20)  NOT NULL,
+    name         VARCHAR(20)  NOT NULL,
+    last_name     varchar(20)  NOT NULL,
     city         VARCHAR(50)  NOT NULL,
     email        VARCHAR(50)  NOT NULL,
     password     VARCHAR(100) NOT NULL,
@@ -17,9 +18,9 @@ CREATE TABLE users
 
 CREATE TABLE authority
 (
-    id       BIGINT PRIMARY KEY AUTO_INCREMENT,
-    nickname VARCHAR(100) NOT NULL,
-    CONSTRAINT authority_key UNIQUE (nickname)
+    id    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    CONSTRAINT authority_key UNIQUE (name)
 );
 
 CREATE TABLE users_authorities

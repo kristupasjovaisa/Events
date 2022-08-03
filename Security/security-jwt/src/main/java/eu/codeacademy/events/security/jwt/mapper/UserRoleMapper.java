@@ -17,7 +17,7 @@ public class UserRoleMapper {
         return UserRoleDto.builder()
                 .user(UserDto.builder()
                         .userId(user.getUserId())
-                        .nickname(user.getNickname())
+                        .name(user.getName())
                         .city(user.getCity())
                         .email(user.getEmail())
                         .password(user.getPassword())
@@ -32,6 +32,6 @@ public class UserRoleMapper {
     }
 
     private Function<Authority, String> getAuthority() {
-        return authority -> "ROLE_" + authority.getNickname();
+        return authority -> "ROLE_" + authority.getName();
     }
 }
