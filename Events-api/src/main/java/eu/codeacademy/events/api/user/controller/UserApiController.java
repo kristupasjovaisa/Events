@@ -2,7 +2,7 @@ package eu.codeacademy.events.api.user.controller;
 
 import eu.codeacademy.events.api.user.dto.AddUserRequest;
 import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
-import eu.codeacademy.events.api.user.dto.UsersResponse;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.service.UserService;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.Api;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,8 +40,8 @@ public class UserApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get user")
     })
-    public UsersResponse getUsers() {
-        return UsersResponse.builder().users(userService.getAllUsers()).build();
+    public List<UserResponse> getUsers() {
+        return userService.getAllUsers();
     }
 
 

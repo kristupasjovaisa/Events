@@ -2,7 +2,6 @@ package eu.codeacademy.events.api.event.controller;
 
 import eu.codeacademy.events.api.event.dto.AddEventRequest;
 import eu.codeacademy.events.api.event.dto.EventResponse;
-import eu.codeacademy.events.api.event.dto.EventsResponse;
 import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.service.EventService;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
@@ -17,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -40,8 +40,8 @@ public class EventApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get events")
     })
-    public EventsResponse getEvents() {
-        return EventsResponse.builder().events(eventService.getAllEvents()).build();
+    public List<EventResponse> getEvents() {
+        return eventService.getAllEvents();
     }
 
     @GetMapping(
