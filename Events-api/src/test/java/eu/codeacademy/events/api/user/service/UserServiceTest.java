@@ -4,7 +4,7 @@ import eu.codeacademy.events.api.user.dto.AddUserRequest;
 import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
 import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.mapper.UserMapper;
-import eu.codeacademy.events.jpa.user.entity.UserEntity;
+import eu.codeacademy.events.jpa.user.entity.User;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +34,7 @@ class UserServiceTest {
     @DisplayName("Shoud add Users")
     void add() {
 
-        UserEntity user = UserEntity
+        User user = User
                 .builder()
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
@@ -59,12 +59,12 @@ class UserServiceTest {
     @DisplayName("Shoud update User by id")
     void update() {
 
-        UserEntity user = UserEntity
+        User user = User
                 .builder()
                 .userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
-        UserEntity updatedUser = UserEntity
+        User updatedUser = User
                 .builder()
                 .userId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
                 .build();
@@ -90,7 +90,7 @@ class UserServiceTest {
     @DisplayName("Shoud delete User by Id")
     void delete() {
 
-        UserEntity user = UserEntity.builder()
+        User user = User.builder()
                 .id(1l)
                 .build();
         Mockito.when(userRepository.findByUserId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))).thenReturn(Optional.of(user));
@@ -103,7 +103,7 @@ class UserServiceTest {
     @DisplayName("Shoud find User by Id")
     void getUserByUUID() {
 
-        UserEntity user = UserEntity.builder().
+        User user = User.builder().
                 userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358"))
                 .build();
 
@@ -119,8 +119,8 @@ class UserServiceTest {
     @Test
     void getAllUsers() {
 
-        List<UserEntity> list = new ArrayList<>();
-        UserEntity user1 = UserEntity.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358")).
+        List<User> list = new ArrayList<>();
+        User user1 = User.builder().userId(UUID.fromString("e4dbc123-a7c2-4bee-a519-e1b9ba991358")).
                 build();
         list.add(user1);
 

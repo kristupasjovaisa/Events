@@ -5,7 +5,7 @@ import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
 import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.exception.UserNotFoundException;
 import eu.codeacademy.events.api.user.mapper.UserMapper;
-import eu.codeacademy.events.jpa.user.entity.UserEntity;
+import eu.codeacademy.events.jpa.user.entity.User;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class UserService {
 
     @Transactional
     public UserResponse update(UpdateUserRequest dto) {
-        Optional<UserEntity> userOptional = userRepository.findByUserId(dto.getUserId());
+        Optional<User> userOptional = userRepository.findByUserId(dto.getUserId());
         if (userOptional.isPresent()) {
             return mapper.mapFrom(userRepository.save(mapper.mapFrom(dto)));
         }
@@ -38,7 +38,7 @@ public class UserService {
 
     @Transactional
     public boolean delete(UUID id) {
-        Optional<UserEntity> user = userRepository.findByUserId(id);
+        Optional<User> user = userRepository.findByUserId(id);
         if (user.isPresent()) {
             user.ifPresent(value -> userRepository.deleteById(value.getId()));
             return true;

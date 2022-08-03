@@ -1,7 +1,7 @@
 package eu.codeacademy.events.jpa.user.entity;
 
 import eu.codeacademy.events.jpa.authority.entity.Authority;
-import eu.codeacademy.events.jpa.event.entity.EventEntity;
+import eu.codeacademy.events.jpa.event.entity.Event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,10 +36,10 @@ public class UserEntity {
     private String phoneNumber;
 
     @ManyToMany(mappedBy = "users")
-    private Set<EventEntity> events;
+    private Set<Event> events;
 
     @OneToMany(mappedBy = "owner")
-    private Set<EventEntity> createdEvents;
+    private Set<Event> createdEvents;
 
     @ManyToMany
     private Set<Authority> authorities;

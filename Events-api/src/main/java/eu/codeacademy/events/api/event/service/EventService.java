@@ -6,7 +6,7 @@ import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.exception.EventNotFoundException;
 import eu.codeacademy.events.api.event.mapper.EventMapper;
 import eu.codeacademy.events.api.utils.SecurityUtils;
-import eu.codeacademy.events.jpa.event.entity.EventEntity;
+import eu.codeacademy.events.jpa.event.entity.Event;
 import eu.codeacademy.events.jpa.event.repository.EventRepository;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class EventService {
 
     @Transactional
     public EventResponse update(UpdateEventRequest dto) {
-        Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
+        Optional<Event> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
             var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
             var event = mapper.mapFrom(dto, eventOptional.get().getId());
@@ -55,7 +55,7 @@ public class EventService {
 
     @Transactional
     public boolean delete(UUID id) {
-        Optional<EventEntity> event = eventRepository.findByEventId(id);
+        Optional<Event> event = eventRepository.findByEventId(id);
         if (event.isPresent()) {
             event.ifPresent(value -> eventRepository.deleteById(value.getId()));
             return true;

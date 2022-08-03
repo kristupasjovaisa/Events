@@ -1,6 +1,6 @@
 package eu.codeacademy.events.jpa.event.entity;
 
-import eu.codeacademy.events.jpa.user.entity.UserEntity;
+import eu.codeacademy.events.jpa.user.entity.User;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "events")
-public class EventEntity {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,8 +37,8 @@ public class EventEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity owner;
+    private User owner;
 
     @ManyToMany
-    private Set<UserEntity> users;
+    private Set<User> users;
 }
