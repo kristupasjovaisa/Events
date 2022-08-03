@@ -1,7 +1,7 @@
 package eu.codeacademy.events.api.user.controller;
 
-import eu.codeacademy.events.api.user.dto.AddUserDto;
-import eu.codeacademy.events.api.user.dto.UpdateUserDto;
+import eu.codeacademy.events.api.user.dto.AddUserRequest;
+import eu.codeacademy.events.api.user.dto.UpdateUserRequest;
 import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.service.UserService;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,21 +40,21 @@ public class UserApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get user")
     })
-    public UserResponse getUsers() {
-        return UserResponse.builder().users(userService.getAllUsers()).build();
+    public List<UserResponse> getUsers() {
+        return userService.getAllUsers();
     }
 
 
     @PostMapping
     @ApiOperation(value = "Create user", httpMethod = "POST")
-    public ResponseEntity<Void> createUser(@Valid @RequestBody AddUserDto dto) {
+    public ResponseEntity<Void> createUser(@Valid @RequestBody AddUserRequest dto) {
         userService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping
     @ApiOperation(value = "Update user", httpMethod = "PUT")
-    public ResponseEntity<Void> updateUser(@Valid @RequestBody UpdateUserDto dto) {
+    public ResponseEntity<Void> updateUser(@Valid @RequestBody UpdateUserRequest dto) {
         if (userService.update(dto) != null) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }

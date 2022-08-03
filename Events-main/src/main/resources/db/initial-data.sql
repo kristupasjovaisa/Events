@@ -1,9 +1,9 @@
-INSERT INTO users(user_id, nickname, city, email, password, phone_number)
-VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'ADMIN', 'Panevezys', 'af@gmail.com', '{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC',
+INSERT INTO users(user_id,name,last_name, city, email, password, phone_number)
+VALUES ('e4dbc123-a7c2-4bee-a519-e1b9ba991341', 'Admin','Admin', 'Panevezys', 'admin@gmail.com', '{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC',
         '+37066655584'),
-       ('e4dbc123-a7c2-4bee-a519-e1b9ba991342', 'USER', 'Kaunas', 'gf@gmail.com','{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW',
+       ('e4dbc123-a7c2-4bee-a519-e1b9ba991342', 'User','User', 'Kaunas', 'user@gmail.com','{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW',
         '+37066655884'),
-       ('e4dbc123-a7c2-4bee-a519-e1b9ba991343', 'Darius', 'Vilnius', 'mf@gmail.com', 'slaptazodis',
+       ('e4dbc123-a7c2-4bee-a519-e1b9ba991343', 'Darius','Lietuvis', 'Vilnius', 'mf@gmail.com', 'slaptazodis',
         '+37066655784');
 
 INSERT INTO events(event_id, name, location, category, price, start_event_date_time, end_event_date_time, description,
@@ -24,10 +24,10 @@ VALUES (1, 1),
        (2, 1),
        (3, 1);
 
-INSERT INTO authority(nickname)
+INSERT INTO authority(name)
 VALUES
-    ('ADMIN'),
-    ('USER');
+    ('Admin'),
+    ('User');
 
 INSERT INTO users_authorities(user_entity_id, authorities_id)
 VALUES

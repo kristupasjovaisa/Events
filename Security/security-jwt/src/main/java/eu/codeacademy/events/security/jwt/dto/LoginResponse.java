@@ -5,7 +5,8 @@ import lombok.Value;
 @Value(staticConstructor = "of")
 public class LoginResponse {
 
-    String nickname;
+    String name;
+    String email;
     String jwtToken;
     Long jwtTokenExpiresIn;
 }

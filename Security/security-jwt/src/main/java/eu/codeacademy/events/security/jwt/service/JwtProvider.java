@@ -67,7 +67,7 @@ public class JwtProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        var entity = userRepository.findUserByNickname(username);
+        var entity = userRepository.findUserByEmail(username);
         if (entity.isPresent()) {
             return new UsernamePasswordAuthenticationToken(userRoleMapper.mapUserRoleFrom(entity.get()),null, authorities);
         }

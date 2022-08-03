@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class UpdateEventDto {
+public class EventResponse {
 
     private UUID eventId;
     private String name;

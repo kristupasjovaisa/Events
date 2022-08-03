@@ -1,9 +1,9 @@
 package eu.codeacademy.events.security.jwt.mapper;
 
-import eu.codeacademy.events.api.user.dto.UserDto;
+import eu.codeacademy.events.api.user.dto.UserResponse;
 import eu.codeacademy.events.api.user.dto.UserRoleDto;
 import eu.codeacademy.events.jpa.authority.entity.Authority;
-import eu.codeacademy.events.jpa.user.entity.UserEntity;
+import eu.codeacademy.events.jpa.user.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Component
 public class UserRoleMapper {
 
-    public UserRoleDto mapUserRoleFrom(UserEntity user) {
+    public UserRoleDto mapUserRoleFrom(User user) {
         return UserRoleDto.builder()
-                .user(UserDto.builder()
+                .user(UserResponse.builder()
                         .userId(user.getUserId())
-                        .nickname(user.getNickname())
+                        .name(user.getName())
                         .city(user.getCity())
                         .email(user.getEmail())
                         .password(user.getPassword())
@@ -32,6 +32,6 @@ public class UserRoleMapper {
     }
 
     private Function<Authority, String> getAuthority() {
-        return authority -> "ROLE_" + authority.getNickname();
+        return authority -> "ROLE_" + authority.getName();
     }
 }

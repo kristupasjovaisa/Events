@@ -1,16 +1,14 @@
 package eu.codeacademy.events.api.user.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-
-import java.util.UUID;
+import lombok.Data;
 
 @Builder
-@Getter
-public class UpdateUserDto {
+@Data
+public class AddUserRequest {
 
-    private UUID userId;
-    private String nickname;
+    private String name;
+    private String lastName;
     private String city;
     private String email;
     private String password;

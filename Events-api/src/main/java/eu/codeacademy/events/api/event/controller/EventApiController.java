@@ -1,15 +1,15 @@
 package eu.codeacademy.events.api.event.controller;
 
-import eu.codeacademy.events.api.event.dto.AddEventDto;
-import eu.codeacademy.events.api.event.dto.EventDto;
-import eu.codeacademy.events.api.event.dto.EventsResponse;
-import eu.codeacademy.events.api.event.dto.UpdateEventDto;
+import eu.codeacademy.events.api.event.dto.AddEventRequest;
+import eu.codeacademy.events.api.event.dto.EventResponse;
+import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.service.EventService;
 import eu.codeacademy.events.commons.swagger.annotation.OpenApi;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -40,8 +41,8 @@ public class EventApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get events")
     })
-    public EventsResponse getEvents() {
-        return EventsResponse.builder().events(eventService.getAllEvents()).build();
+    public List<EventResponse> getEvents() {
+        return eventService.getAllEvents();
     }
 
     @GetMapping(
@@ -53,29 +54,8 @@ public class EventApiController {
             @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to get event")
     })
-    public EventDto getEventByUUID(@PathVariable("uuid") UUID id) {
+    public EventResponse getEventByUUID(@PathVariable("uuid") UUID id) {
         return eventService.getEventByUUID(id);
-    }
-
-    @GetMapping(path = "/page")
-    @ApiOperation(value = "Get all event by page and size")
-    public Page<EventDto> eventsPaginated(
-            @ApiParam(
-                    name = "page",
-                    type = "int",
-                    value = "Number of page",
-                    example = "1",
-                    required = true)
-            @RequestParam("page") int page,
-
-            @ApiParam(
-                    name = "size",
-                    type = "int",
-                    value = "Content size in page",
-                    example = "1",
-                    required = true)
-            @RequestParam("size") int size) {
-        return eventService.getEventPaginated(PageRequest.of(page, size));
     }
 
     @DeleteMapping(path = UUID_PATH)
@@ -88,7 +68,7 @@ public class EventApiController {
     @PostMapping
     @ApiOperation(value = "Create event", httpMethod = "POST")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> createEvent(@Valid @RequestBody AddEventDto dto) {
+    public ResponseEntity<Void> createEvent(@Valid @RequestBody AddEventRequest dto) {
         eventService.add(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -96,7 +76,7 @@ public class EventApiController {
     @PutMapping
     @ApiOperation(value = "Update event", httpMethod = "PUT")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> updateEvent(@Valid @RequestBody UpdateEventDto dto) {
+    public ResponseEntity<Void> updateEvent(@Valid @RequestBody UpdateEventRequest dto) {
         if (eventService.update(dto) != null) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }

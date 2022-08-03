@@ -1,17 +1,15 @@
 package eu.codeacademy.events.api.event.service;
 
-import eu.codeacademy.events.api.event.dto.AddEventDto;
-import eu.codeacademy.events.api.event.dto.EventDto;
-import eu.codeacademy.events.api.event.dto.UpdateEventDto;
+import eu.codeacademy.events.api.event.dto.AddEventRequest;
+import eu.codeacademy.events.api.event.dto.EventResponse;
+import eu.codeacademy.events.api.event.dto.UpdateEventRequest;
 import eu.codeacademy.events.api.event.exception.EventNotFoundException;
 import eu.codeacademy.events.api.event.mapper.EventMapper;
 import eu.codeacademy.events.api.utils.SecurityUtils;
-import eu.codeacademy.events.jpa.event.entity.EventEntity;
+import eu.codeacademy.events.jpa.event.entity.Event;
 import eu.codeacademy.events.jpa.event.repository.EventRepository;
 import eu.codeacademy.events.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +27,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final EventMapper mapper;
 
-    public EventDto add(AddEventDto dto) {
+    public EventResponse add(AddEventRequest dto) {
         var event = mapper.mapFrom(dto);
         var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
         if (owner.isPresent()) {
@@ -39,8 +37,8 @@ public class EventService {
     }
 
     @Transactional
-    public EventDto update(UpdateEventDto dto) {
-        Optional<EventEntity> eventOptional = eventRepository.findByEventId(dto.getEventId());
+    public EventResponse update(UpdateEventRequest dto) {
+        Optional<Event> eventOptional = eventRepository.findByEventId(dto.getEventId());
         if (eventOptional.isPresent()) {
             var owner = userRepository.findByUserId(SecurityUtils.getUser().getUserId());
             var event = mapper.mapFrom(dto, eventOptional.get().getId());
@@ -55,7 +53,7 @@ public class EventService {
 
     @Transactional
     public boolean delete(UUID id) {
-        Optional<EventEntity> event = eventRepository.findByEventId(id);
+        Optional<Event> event = eventRepository.findByEventId(id);
         if (event.isPresent()) {
             event.ifPresent(value -> eventRepository.deleteById(value.getId()));
             return true;
@@ -63,12 +61,12 @@ public class EventService {
         return false;
     }
 
-    public EventDto getEventByUUID(UUID id) {
+    public EventResponse getEventByUUID(UUID id) {
         return eventRepository.findByEventId(id).map(event -> mapper.mapFrom(event))
                 .orElseThrow(() -> new EventNotFoundException(id));
     }
 
-    public List<EventDto> getAllEvents() {
+    public List<EventResponse> getAllEvents() {
         var list = eventRepository.findAll();
         if (list != null) {
             return list.stream()
@@ -76,10 +74,5 @@ public class EventService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
-    }
-
-    public Page<EventDto> getEventPaginated(Pageable pageable) {
-        return eventRepository.findAll(pageable)
-                .map(eventEntity -> mapper.mapFrom(eventEntity));
     }
 }
